@@ -15,18 +15,29 @@ import java.util.Scanner;
  */
 public class ListaVuelos {
 
+    /**
+     * Atrivuto que contiene la capacidad de un vuelo
+     */
     private int capacidad;
 
+    /**
+     * Atributo que contiene la ocupacion de un vuelo
+     */
     private int ocupacion;
 
+    /**
+     * Atributo que contiene el vector donde estan los vuelos
+     */
     private Vuelo[] ListaVuelos;
 
     /**
-     * Constructor of the class
+     * Constructor of the class.
      *
      * @param capacidad
      */
     public ListaVuelos(int capacidad){
+        this.ocupacion = 0;
+        this.capacidad = capacidad;
         ListaVuelos = new Vuelo[capacidad];
     }
     public int getOcupacion(){
@@ -49,9 +60,9 @@ public class ListaVuelos {
     //Devuelve true si puede insertar el vuelo
     public boolean insertarVuelo (Vuelo vuelo){
         boolean insertar = false;
-        if (estaLlena() == false){
-            ListaVuelos[ocupacion] = vuelo;
-            ocupacion ++;
+        if (!estaLlena()){
+            ListaVuelos[getOcupacion()] = vuelo;
+            ocupacion++;
             insertar = true;
         }
         return insertar;
@@ -61,35 +72,52 @@ public class ListaVuelos {
     //Si no lo encuentra, devolverá null
     public Vuelo buscarVuelo (String id){
         Vuelo resultado = null;
-        for (int i = 0; i < ListaVuelos.length; i ++){
+        for (int i = 0; i < getOcupacion(); i++){
             if (Objects.equals(ListaVuelos[i].getID(), id)){
                 resultado = ListaVuelos[i];
             }
         }
+        /*
+        for (int i = 0; i < ListaVuelos.length; i ++){
+            if (Objects.equals(ListaVuelos[i].getID(), id)){
+                resultado = ListaVuelos[i];
+            }
+        }*/
         return resultado;
     }
 
     //Devuelve un nuevo objeto ListaVuelos conteniendo los vuelos que vayan de un aeropuerto a otro en una determinada fecha
     public ListaVuelos buscarVuelos(String codigoOrigen, String codigoDestino, Fecha fecha){
-        ListaVuelos vuelosBuscados = new ListaVuelos(ocupacion);
-        for (int i = 0; i < ocupacion; i ++){
-            if (codigoOrigen.equals(ListaVuelos[i].getOrigen().getCodigo())){
-                if (codigoDestino.equals(ListaVuelos[i].getDestino().getCodigo())){
-                    if (fecha.coincide(ListaVuelos[i].getSalida()));
-                }
+        ListaVuelos [] vuelosBuscados = new ListaVuelos[ocupacion];
+
+        for (int i = 0; i < ocupacion; i++){
+            if ((codigoOrigen.equals(ListaVuelos[i].getOrigen().getCodigo())) && (codigoDestino.equals(ListaVuelos[i].getDestino().getCodigo()) && (fecha.coincide(ListaVuelos[i].getSalida())))){
+                System.out.println(ListaVuelos[i]);
+
+                //es.upm.tp.Vuelo vuelo;
+                //vuelo = ListaVuelos[i];
+                //vuelosBuscados[i] = vuelo;
+
             }
         }
-        return vuelosBuscados;
+        /*
+        for (int i = 0; i < ocupacion; i++){
+            if (codigoOrigen.equals(ListaVuelos[i].getOrigen().getCodigo())){
+                if (codigoDestino.equals(ListaVuelos[i].getDestino().getCodigo())){
+                    if (fecha.coincide(ListaVuelos[i].getSalida())){
+                        listarVuelos();
+                    }
+                }
+            }
+        }*/
+        return null;
     }
 
     //Muestra por pantalla los vuelos siguiendo el formato de los ejemplos del enunciado
     public void listarVuelos() {
-        int i;
-        do {
-            i = 0;
-            System.out.println(ListaVuelos[i].toString());
-            i++;
-        } while (i < ocupacion);
+        for (int i = 0; i < getOcupacion(); i++){
+            System.out.println(ListaVuelos[i]);
+        }
     }
 
     //Permite seleccionar un vuelo existente a partir de su ID, usando el mensaje pasado como argumento para la solicitud
@@ -106,12 +134,12 @@ public class ListaVuelos {
             }else{
                 vueloExistente = buscarVuelo(pantalla);
                 if (vueloExistente == null){
-                    System.out.println("El ID del vuelo no se ha encontrado");
+                    System.out.println("ID de vuelo no encontrado");
                 }else{
                     vueloTerminado = true;
                 }
             }
-        }while (vueloTerminado == false);
+        }while (!vueloTerminado);
         return vueloExistente;
     }
 
@@ -171,7 +199,7 @@ public class ListaVuelos {
                 destino = aeropuertos.buscarAeropuerto(codigoD);
                 actual = new Vuelo(ID, AvionUso, origen, torigen, salida, destino, tdestino, llegada, precio);
                 ListaVuelosCsv.insertarVuelo(actual);
-            } while (teclado.hasNext());
+            } while (teclado.hasNextLine());
         }catch (FileNotFoundException e){
             System.out.println("El fichero " + fichero + " no se ha encontrado");
         }finally{

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author      Cesar Gimenez Laguna
+ * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
  * @version     1.0
  */
@@ -36,6 +36,7 @@ import java.util.Scanner;
      * @param capacidad especifica la capacidad del aeropuerto
      */
     public ListaAeropuertos(int capacidad){
+        this.capacidad = capacidad;
         listaAeropuertos = new Aeropuerto[capacidad];
     }
 
@@ -69,9 +70,14 @@ import java.util.Scanner;
         return listaAeropuertos[i];
     }
 
+
+    /** Inserta un aeropuerto en el array ListaAeropuertos
+     * @param aeropuerto Es el aeropuerto que se quiere insertar en la lista
+     * @return devuelve true si se ha insertado el aeropuerto o false si no se ha añadido
+     */
     public boolean insertarAeropuerto(Aeropuerto aeropuerto){ //añadir a la lista el aeropuerto, si esta no esta llena.
         boolean insertar = false;
-        if (estaLlena() == false){
+        if (!estaLlena()){
           listaAeropuertos[ocupacion] = aeropuerto;
           ocupacion ++;
           insertar = true;

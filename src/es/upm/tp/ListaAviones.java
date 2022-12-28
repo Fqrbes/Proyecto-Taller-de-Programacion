@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author      Cesar Gimenez Laguna
+ * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
  * @version     1.0
  */
@@ -35,6 +35,7 @@ public class ListaAviones {
      * @param capacidad especifica la capacidad del avion
      */
     public ListaAviones(int capacidad){
+        this.capacidad = capacidad;
         ListaAviones = new Avion[capacidad];
     }
 
@@ -72,7 +73,7 @@ public class ListaAviones {
      */
     public boolean insertarAvion(Avion avion) {
         boolean insertar = false;
-        if (estaLlena() == false){
+        if (!estaLlena()){
             ListaAviones[ocupacion] = avion;
             ocupacion ++;
             insertar = true;
@@ -118,12 +119,12 @@ public class ListaAviones {
                 System.out.println("Matricula de avion no encontrado.");
             }
             else if (avion.getAlcance() < alcance){
-                System.out.println("Avión seleccionado con alcance insuficiente (menor que " + alcance + " km).");
+                System.out.printf("Avión seleccionado con alcance insuficiente (menor que %.3f km).\n", alcance);
             }
             else {
                 alcanceSuficiente = true;
             }
-        }while (buscarAvion(matricula) == null || alcanceSuficiente == false);
+        }while (buscarAvion(matricula) == null || !alcanceSuficiente);
         return avion;
     }
 

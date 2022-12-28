@@ -27,6 +27,7 @@ public class ListaPasajeros {
      * @param capacidad
      */
     public ListaPasajeros(int capacidad){
+        this.capacidad = capacidad;
         listaPasajeros = new Pasajero[capacidad];
     }
 
@@ -48,7 +49,7 @@ public class ListaPasajeros {
 
     public boolean insertarPasajero(Pasajero pasajero){
         boolean insertar = false;
-        if (estaLlena() == false){
+        if (!estaLlena()){
             listaPasajeros[ocupacion] = pasajero;
             ocupacion ++;
             insertar = true;

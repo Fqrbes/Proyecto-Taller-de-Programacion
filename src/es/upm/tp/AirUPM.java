@@ -35,14 +35,14 @@ public class AirUPM {
 
     /**
      * Constructor of the class
-     * 
-     * @param maxAeropuertos 
+     *
+     * @param maxAeropuertos
      * @param maxAviones
      * @param maxVuelos
      * @param maxPasajeros
      * @param maxBilletesPasajero
      */
-    public AirUPM(int maxAeropuertos, int maxAviones, int maxVuelos, int maxPasajeros, int maxBilletesPasajero, String aeropuerto, String avion, String vuelo, String pasajeros, String billetes){
+    public AirUPM(int maxAeropuertos, int maxAviones, int maxVuelos, int maxPasajeros, int maxBilletesPasajero, String aeropuerto, String avion, String vuelo, String pasajeros, String billetes) {
         this.maxAeropuertos = maxAeropuertos;
         this.maxAviones = maxAviones;
         this.maxVuelos = maxVuelos;
@@ -57,7 +57,7 @@ public class AirUPM {
     }
 
     // Lee los datos de los ficheros especificados y los agrega a AirUPM
-    public void cargarDatos(String ficheroAeropuertos, String ficheroAviones, String ficheroVuelos, String ficheroPasajeros, String ficheroBilletes){
+    public void cargarDatos(String ficheroAeropuertos, String ficheroAviones, String ficheroVuelos, String ficheroPasajeros, String ficheroBilletes) {
         listaAeropuertos = ListaAeropuertos.leerAeropuertosCsv(ficheroAeropuertos, maxAeropuertos);
         listaAviones = ListaAviones.leerAvionesCsv(ficheroAviones, maxAviones);
         listaVuelos = ListaVuelos.leerVuelosCsv(ficheroVuelos, maxVuelos, listaAeropuertos, listaAviones);
@@ -65,46 +65,46 @@ public class AirUPM {
     }
 
     // Almacena los datos de AirUPM en los ficheros CSV especificados
-    public boolean guardarDatos(String ficheroAeropuertos, String ficheroAviones, String ficheroVuelos, String ficheroPasajeros, String ficheroBilletes){
+    public boolean guardarDatos(String ficheroAeropuertos, String ficheroAviones, String ficheroVuelos, String ficheroPasajeros, String ficheroBilletes) {
         boolean listasCorrectas = true;
         if (listaAeropuertos.escribirAeropuertosCsv(ficheroAeropuertos) == false) {
             listasCorrectas = false;
         }
-        if (listaAviones.escribirAvionesCsv(ficheroAviones) == false){
+        if (listaAviones.escribirAvionesCsv(ficheroAviones) == false) {
             listasCorrectas = false;
         }
-        if (listaVuelos.escribirVuelosCsv(ficheroVuelos) == false){
+        if (listaVuelos.escribirVuelosCsv(ficheroVuelos) == false) {
             listasCorrectas = false;
         }
-        if (listaPasajeros.escribirPasajerosCsv(ficheroPasajeros) == false){
+        if (listaPasajeros.escribirPasajerosCsv(ficheroPasajeros) == false) {
             listasCorrectas = false;
         }
         return listasCorrectas;
     }
 
-    public boolean maxVuelosAlcanzado(){
+    public boolean maxVuelosAlcanzado() {
         return listaVuelos.estaLlena();
     }
 
-    public boolean insertarVuelo (Vuelo vuelo){
+    public boolean insertarVuelo(Vuelo vuelo) {
         return listaVuelos.insertarVuelo(vuelo);
     }
 
-    public boolean maxPasajerosAlcanzado(){
+    public boolean maxPasajerosAlcanzado() {
         return listaPasajeros.estaLlena();
     }
 
-    public boolean insertarPasajero (Pasajero pasajero){
+    public boolean insertarPasajero(Pasajero pasajero) {
         return listaPasajeros.insertarPasajero(pasajero);
     }
 
     // Funcionalidad buscarVuelo especificada en el enunciado del proyecto, que devuelve una lista de vuelos entre dos aeropuertos y
     // con una fecha de salida solicitados por teclado al usuario en el orden y con los textos indicados en los ejemplos de
     // ejecución del enunciado
-    public ListaVuelos buscarVuelo(Scanner teclado){
+    public ListaVuelos buscarVuelo(Scanner teclado) {
         Aeropuerto aeropuertoOrigen = listaAeropuertos.seleccionarAeropuerto(teclado, "Ingrese código de Aeropuerto Origen:");
         Aeropuerto aeropuertoDestino = listaAeropuertos.seleccionarAeropuerto(teclado, "Ingrese código de Aeropuerto Destino:");
-        Fecha fechaSalidaVuelo = Utilidades.leerFecha(teclado,"Fecha de Salida:");
+        Fecha fechaSalidaVuelo = Utilidades.leerFecha(teclado, "Fecha de Salida:");
 
         return listaVuelos.buscarVuelos(aeropuertoOrigen.getCodigo(), aeropuertoDestino.getCodigo(), fechaSalidaVuelo);
     }
@@ -117,9 +117,9 @@ public class AirUPM {
     //public void comprarBillete(Scanner teclado, Random rand, Vuelo vuelo);
 
     //Métodos estáticos
-    
+
     // Muestra el menú y solicita una opción por teclado
-    public static int menu(Scanner teclado){
+    public static int menu(Scanner teclado) {
         System.out.println("1. Alta Vuelo");
         System.out.println("2. Alta Pasajero");
         System.out.println("3. Buscar Vuelo");
@@ -131,7 +131,7 @@ public class AirUPM {
 
     // Carga los datos de los ficheros CSV pasados por argumento (consola) en AirUPM, llama iterativamente al menú y realiza la
     //  opción especificada hasta que se indique la opción Salir, y finalmente guarda los datos de AirUPM en los mismos ficheros CSV
-    public static void main(String[] args){
+    public static void main(String[] args) {
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto.");
         } else {
@@ -157,7 +157,11 @@ public class AirUPM {
                         } else {
                             Pasajero nuevoPasajero = Pasajero.altaPasajero(sc, airUPM.listaPasajeros, airUPM.maxBilletesPasajeros);
                             if (airUPM.insertarPasajero(nuevoPasajero)) {
-                                System.out.println("Pasajero con DNI " + nuevoPasajero.getDNI() + " dado de alta con éxito.");
+                                System.out.printf("Pasajero con DNI %08d" + nuevoPasajero.getLetraDNI() + " dado de alta con éxito.\n" ,nuevoPasajero.getNumeroDNI());
+                                //System.out.printf("Pasajero con DNI " + nuevoPasajero.getDNI() + " dado de alta con éxito.\n");
+                                //Juan Alberto
+                                //García Gámez
+                                //ja.garcia@alumnos.upm.es
                             }
                         }
                         break;
@@ -175,7 +179,7 @@ public class AirUPM {
                         break;
                     case 0:
                         salir = true;
-                        airUPM.guardarDatos(airUPM.aeropuerto, airUPM.avion, airUPM.vuelo, airUPM.pasajeros, airUPM.billetes);
+                        //airUPM.guardarDatos(airUPM.aeropuerto, airUPM.avion, airUPM.vuelo, airUPM.pasajeros, airUPM.billetes);
                 }
             }
         }

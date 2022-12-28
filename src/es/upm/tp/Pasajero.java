@@ -99,7 +99,6 @@ public class Pasajero {
         String email;
 
         do {
-            //correcto = false; //Si no funciona probar con dos Do
             existeDni = false;
             numero = Utilidades.leerNumero(teclado, "Ingrese número de DNI:", 00000000L, 99999999L);
             letra = Utilidades.leerLetra(teclado, "Ingrese letra de DNI:", 'A','Z');
@@ -107,10 +106,10 @@ public class Pasajero {
                 existeDni = true;
                 System.out.println("DNI ya existe.");
             }
-            if (correctoDNI(numero, letra) == false){
+            if (!correctoDNI(numero, letra)){
                 System.out.println("DNI incorrecto.");
             }
-        } while ((correctoDNI(numero,letra) == false) || (existeDni == true));
+        } while ((!correctoDNI(numero, letra)) || (existeDni));
 
         do {
             existeEmail = false;
@@ -120,7 +119,7 @@ public class Pasajero {
                 existeEmail = true;
                 System.out.println("Email ya existe.");
             }
-        }while(!correctoEmail(email) || (existeEmail == true));
+        }while(!correctoEmail(email) || (existeEmail));
 
         return nuevoPasajero = new Pasajero(nombre, apellidos, numero, letra, email, maxBilletes);
     }
