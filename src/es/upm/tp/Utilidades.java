@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author      Cesar Gimenez Laguna
+ * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
  * @version     1.0
  */

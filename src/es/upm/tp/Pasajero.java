@@ -72,15 +72,23 @@ public class Pasajero {
         }
 
     //public int numBilletesComprado();
+
     //public boolean maxBilletesAlcanzado();
+
     //public Billete getBillete(int i);
+
     //public boolean aniadirBillete(Billete billete);
+
     //public Billete buscarBillete(String localizador);
+
     // comentario; Elimina el billete de la lista de billetes del pasajero
     //public boolean cancelarBillete(String localizador);
+
     //public void listarBilletes();
+
     // comentario; Encapsula la funcionalidad seleccionarBillete de ListaBilletes
     //public Billete seleccionarBillete(Scanner teclado, String mensaje);
+
 
     //Métodos estáticos
 

@@ -6,9 +6,9 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author      Cesar Gimenez Laguna
- * @author      Iñaki Ramos Iturria
- * @version     1.0
+ * @author Cesar Jimenez Laguna
+ * @author Iñaki Ramos Iturria
+ * @version 1.0
  */
 public class AirUPM {
     private int maxAeropuertos;

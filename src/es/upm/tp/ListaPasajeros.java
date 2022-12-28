@@ -9,32 +9,52 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author      Cesar Gimenez Laguna
+ * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
  * @version     1.0
  */
 public class ListaPasajeros {
+    //Atributos privados, todos
 
+
+    /**
+     * Atributo que devuelve la capacidad de la lista de pasajeros
+     */
     private int capacidad;
 
+
+    /**
+     * Atributo que contiene la ocupacion de la lista de pasajeros
+     */
     private int ocupacion;
 
+
+    /**
+     * Atributo que contiene el vector donde estan los pasajeros
+     */
     private Pasajero[] listaPasajeros;
 
     /**
-     * Constructor of the class
+     * Constructor de la clase, crea un vector que contiene la cantidad de pasajeros recibidos que van a abordar
+     * sus respectivos aviones
      *
-     * @param capacidad
+     * @param capacidad especifica la capacidad de la lista de pasajeros
      */
     public ListaPasajeros(int capacidad){
         this.capacidad = capacidad;
         listaPasajeros = new Pasajero[capacidad];
     }
 
+    /**
+     * @return Devuelve la cantidad de pasajeros que hay en ListaPasajeros
+     */
     public int getOcupacion(){
         return ocupacion;
     }
 
+    /** Devuelve verdadero si la listaPasajeros esta llena, si no, devuelve falso
+     * @return especifica verdadero o falso segun como este listaPasajeros
+     */
     public boolean estaLlena(){
         boolean estaLlena = false;
         if (ocupacion == listaPasajeros.length){
@@ -43,10 +63,18 @@ public class ListaPasajeros {
         return estaLlena;
     }
 
+    /** Devuelve el pasajero que se encuentre en la posicion recibida por el parametro
+     * @param i especifica la posicion del pasajero en la lista
+     * @return devuelve el pasajero pedido por parametro
+     */
     public Pasajero getPasajero(int i){
         return listaPasajeros[i];
     }
 
+    /** Inserta un pasajero en el array ListaPasajeros
+     * @param pasajero Es el pasajero que se quiere insertar en la lista
+     * @return devuelve true si se ha insertado el pasajero o false si no se ha añadido
+     */
     public boolean insertarPasajero(Pasajero pasajero){
         boolean insertar = false;
         if (!estaLlena()){
@@ -57,6 +85,10 @@ public class ListaPasajeros {
         return insertar;
     }
 
+    /**
+     * @param dni
+     * @return
+     */
     public Pasajero buscarPasajeroDNI(String dni){
         Pasajero resultado = null;
         boolean encontrado = false; //IMPORTANTE
@@ -69,6 +101,10 @@ public class ListaPasajeros {
         return resultado;
     }
 
+    /**
+     * @param email
+     * @return
+     */
     public Pasajero buscarPasajeroEmail(String email){
         Pasajero resultado = null;
         for (int i = 0; i < ocupacion; i ++){
@@ -79,6 +115,11 @@ public class ListaPasajeros {
         return resultado;
     }
 
+    /** Selecciona el pasajero, si existe, del dni que pasa el usuario. A su vez comprueba si este es correcto y no fue utilizado por otros
+     * @param teclado el usuario introduce el dni del pasajero que desea
+     * @param mensaje mensaje que se muestra por pantalla
+     * @return devuelve el pasajero seeleccionado si cumple los requisitos (que exista  y tenga alcance suficiente)
+     */
     // Permite seleccionar un pasajero existente a partir de su DNI, usando el mensaje pasado como argumento para la solicitud
     // y siguiendo el orden y los textos mostrados en el enunciado
     // La función solicita repetidamente hasta que se introduzca un DNI correcto
@@ -114,6 +155,7 @@ public class ListaPasajeros {
         }
         return copiado;
     }
+
 
     //Métodos estáticos
     // Genera una lista de pasajeros a partir del fichero CSV, usando los límites especificados como argumentos para la capacidad
