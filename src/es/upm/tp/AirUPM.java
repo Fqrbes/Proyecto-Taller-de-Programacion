@@ -138,16 +138,16 @@ public class AirUPM {
             System.out.println("Número de argumentos incorrecto.");
         } else {
             Random random = new Random();
-            Scanner sc = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
             AirUPM airUPM = new AirUPM(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), args[5], args[6], args[7], args[8], args[9]);
             boolean salir = false;
             while (!salir) {
-                switch (menu(sc)) {
+                switch (menu(scanner)) {
                     case 1:
                         if (airUPM.maxVuelosAlcanzado()) {
                             System.out.println("No se pueden dar de alta más vuelos.");
                         } else {
-                            Vuelo nuevoVuelo = Vuelo.altaVuelo(sc, random, airUPM.listaAeropuertos, airUPM.listaAviones, airUPM.listaVuelos);
+                            Vuelo nuevoVuelo = Vuelo.altaVuelo(scanner, random, airUPM.listaAeropuertos, airUPM.listaAviones, airUPM.listaVuelos);
                             if (airUPM.insertarVuelo(nuevoVuelo)) {
                                 System.out.println("Vuelo " + nuevoVuelo.getID() + " creado con éxito.");
                             }
@@ -157,7 +157,7 @@ public class AirUPM {
                         if (airUPM.maxPasajerosAlcanzado()) {
                             System.out.println("No se pueden dar de alta más pasajeros.");
                         } else {
-                            Pasajero nuevoPasajero = Pasajero.altaPasajero(sc, airUPM.listaPasajeros, airUPM.maxBilletesPasajeros);
+                            Pasajero nuevoPasajero = Pasajero.altaPasajero(scanner, airUPM.listaPasajeros, airUPM.maxBilletesPasajeros);
                             if (airUPM.insertarPasajero(nuevoPasajero)) {
                                 System.out.printf("Pasajero con DNI %08d" + nuevoPasajero.getLetraDNI() + " dado de alta con éxito.\n" ,nuevoPasajero.getNumeroDNI());
                                 //System.out.printf("Pasajero con DNI " + nuevoPasajero.getDNI() + " dado de alta con éxito.\n");
@@ -168,17 +168,50 @@ public class AirUPM {
                         }
                         break;
                     case 3:
-                        ListaVuelos lista = airUPM.buscarVuelo(sc);
+                        ListaVuelos lista = airUPM.buscarVuelo(scanner);
                         if (lista.getVuelo(0) == null) {
                             System.out.println("No se ha encontrado ningún vuelo.");
                         } else {
                             lista.listarVuelos();
+                            Vuelo comprarBillete = lista.seleccionarVuelo(scanner, "Ingrese ID de vuelo para comprar billete o escribir CANCELAR:", "CANCELAR");
+                            if (comprarBillete != null){
+                                airUPM.comprarBillete(scanner, new Random(), comprarBillete);
+                            }
                         }
                         break;
                     case 4:
+                        Pasajero pasajeroActual = airUPM.listaPasajeros.seleccionarPasajero(scanner, "Ingrese DNI del pasajero:");
+                        if (pasajeroActual.numBilletesComprado() == 0){
+                            System.out.println("El pasajero seleccionado no ha adquirido ningun billete.");
+                        }else{
+                            Billete billeteActual = pasajeroActual.seleccionarBillete(scanner, "Ingrese localizador del billete:");
+                            char opcion;
+                            do {
+                                opcion = Utilidades.leerLetra(scanner, "¿Generar factura del billete (f), cancelar (c) o volver al menu (m)?", 'a', 'z');
+                                if (opcion != 'f' && opcion != 'c' && opcion != 'm'){
+                                    System.out.println("El valor de la entrada debe ser 'f', 'c' o 'm'");
+                                }
+                            }while (opcion != 'f' && opcion != 'c' && opcion != 'm');
+                            if (opcion == 'f'){
+                                System.out.print("Introduzca la ruta donde generar la factura");
+                                String rutaFactura = scanner.nextLine();
+                                billeteActual.generarFactura(rutaFactura);
+                            }else{
+                                if (opcion == 'c'){
+                                  billeteActual.cancelar();
+                                }
+                            }
+                        }
                         break;
                     case 5:
+                        Vuelo vueloActual = airUPM.listaVuelos.seleccionarVuelo(scanner, "Ingrese ID de vuelo:", "CANCELAR");
+                        System.out.println("Introduzca la ruta donde generar la lista de pasajeros:");
+                        String rutaPasajeros = scanner.nextLine();
+                        if (vueloActual.generarListaPasajeros(rutaPasajeros)){
+                            System.out.println("Lista de pasajeros del Vuelo " + vueloActual.getID() + "generada en " + rutaPasajeros);
+                        }
                         break;
+
                     case 0:
                         salir = true;
                         //airUPM.guardarDatos(airUPM.aeropuerto, airUPM.avion, airUPM.vuelo, airUPM.pasajeros, airUPM.billetes);

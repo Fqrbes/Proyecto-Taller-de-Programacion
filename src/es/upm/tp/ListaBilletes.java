@@ -152,18 +152,42 @@ public class ListaBilletes {
 
     // Lee los billetes del fichero CSV y los añade a las lista de sus respectivos Vuelos y Pasajeros
     public static void leerBilletesCsv(String ficheroBilletes, ListaVuelos vuelos, ListaPasajeros pasajeros) {
-        Scanner s = null;
+        Scanner teclado = null;
         String entrada;
-        boolean logrado = true;
-        String locBillete, idVuelo, dni, tipo;
+        boolean leerLogrado = true;
+        String localizarBillete;
+        String idVuelo;
+        String dni;
+        String tipo;
+        int filas;
+        int columnas;
         double precio;
-        Pasajero pactual;
-        Vuelo vactual;
+        Pasajero pasajeroActual;
+        Vuelo vueloActual;
         try {
-            s = new Scanner(new FileReader(ficheroBilletes));
-
+            teclado = new Scanner(new FileReader(ficheroBilletes));
+            do {
+                entrada = teclado.nextLine();
+                String[] arrayCsvBilletes = entrada.split(";");
+                localizarBillete = arrayCsvBilletes[0];
+                idVuelo = arrayCsvBilletes[1];
+                dni = arrayCsvBilletes[2];
+                tipo = arrayCsvBilletes[3];
+                filas = Integer.parseInt(arrayCsvBilletes[4]);
+                columnas = Integer.parseInt(arrayCsvBilletes[5]);
+                precio = Double.parseDouble(arrayCsvBilletes[6]);
+                vueloActual = vuelos.buscarVuelo(idVuelo);
+                pasajeroActual = pasajeros.buscarPasajeroDNI(dni);
+                Billete billete = new Billete(localizarBillete, vueloActual,pasajeroActual,Billete.TIPO.valueOf(tipo),filas,columnas,precio);
+                pasajeroActual.aniadirBillete(billete);
+                vueloActual.ocuparAsiento(billete);
+            }while(teclado.hasNext());
         } catch (FileNotFoundException e) {
-
+            System.out.println("El fichero " + ficheroBilletes + " no se ha encontrado.");
+        }finally {
+            if (teclado != null){
+                teclado.close();
+            }
         }
     }
 }

@@ -1,5 +1,8 @@
 package es.upm.tp;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,6 +23,8 @@ public class Billete {
     private int columna;
     private double precio;
     private int ocupacion;
+    private ListaBilletes listaBilletesVuelo;
+
     /**
      * Constructor of the class
      *
@@ -39,7 +44,8 @@ public class Billete {
         this.fila = fila;
         this.columna = columna;
         this.precio = precio;
-        this.ocupacion = 0;
+        ocupacion = 0;
+        listaBilletesVuelo = new ListaBilletes(ocupacion);
     }
 
     public String getLocalizador(){
@@ -92,10 +98,19 @@ public class Billete {
 
     // Cancela este billete, eliminandolo de la lista de billetes del vuelo y del pasajero correspondiente
     public boolean cancelar(){
-        boolean cancelar = false;
-
+        boolean cancelar = true;
+        if (!getVuelo().desocuparAsiento(localizador)){
+            cancelar = false;
+        }
+        if (!getPasajero().cancelarBillete(localizador)){
+            cancelar = false;
+        }
+        if (cancelar){
+            System.out.println("Billete " + localizador + " cancelado.");
+        }
         return cancelar;
     }
+
 
     // Imprime la informacion de este billete en un fichero siguiendo el formato de los ejemplos de ejecución del enunciado
     public boolean generarFactura(String fichero) {

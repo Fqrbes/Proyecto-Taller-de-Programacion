@@ -23,6 +23,8 @@ public class Pasajero {
 
     private int maxBilletes;
 
+    private ListaBilletes listaBilletesPasajeros;
+
     /**
      * Constructor of the class
      *
@@ -39,6 +41,7 @@ public class Pasajero {
         this.letraDNI = letraDNI;
         this.email = email;
         this.maxBilletes = maxBilletes;
+        listaBilletesPasajeros = new ListaBilletes(maxBilletes);
     }
 
     public String getNombre(){
@@ -71,24 +74,47 @@ public class Pasajero {
         return nombre + " " + apellidos +", " + getDNI() +", " + email;
         }
 
-    //public int numBilletesComprado();
+    public int numBilletesComprado(){
+        return listaBilletesPasajeros.getOcupacion();
+    }
 
-    //public boolean maxBilletesAlcanzado();
+    public boolean maxBilletesAlcanzado(){
+        return maxBilletes == numBilletesComprado();
+    }
 
-    //public Billete getBillete(int i);
+    public Billete getBillete(int i){
+        return listaBilletesPasajeros.getBillete(i);
+    }
 
-    //public boolean aniadirBillete(Billete billete);
+    public boolean aniadirBillete(Billete billete){
+        if (maxBilletesAlcanzado()){
+            return false;
+        }else{
+            listaBilletesPasajeros.insertarBillete(billete);
+        }
+        return true;
+    }
 
-    //public Billete buscarBillete(String localizador);
+    public Billete buscarBillete(String localizador){
+        Billete localizado = null;
+        localizado = listaBilletesPasajeros.buscarBillete(localizador);
+        return localizado;
+    }
 
     // comentario; Elimina el billete de la lista de billetes del pasajero
-    //public boolean cancelarBillete(String localizador);
+    public boolean cancelarBillete(String localizador){
+        return listaBilletesPasajeros.eliminarBillete(localizador);
+    }
 
-    //public void listarBilletes();
+    public void listarBilletes(){
+        listaBilletesPasajeros.listarBilletes();
+    }
 
     // comentario; Encapsula la funcionalidad seleccionarBillete de ListaBilletes
-    //public Billete seleccionarBillete(Scanner teclado, String mensaje);
-
+    public Billete seleccionarBillete(Scanner teclado, String mensaje){
+        //Encapsula el billete de la "Lista de Billetes" del pasajero
+        return listaBilletesPasajeros.seleccionarBillete(teclado, mensaje);
+    }
 
     //Métodos estáticos
 
