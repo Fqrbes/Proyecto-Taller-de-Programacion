@@ -1,7 +1,5 @@
 package es.upm.tp;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -88,8 +86,8 @@ public class Billete {
     //                                                :
     // Texto que debe generar: Billete PM1111AAAA para Vuelo PM1111 de MAD T4 (24/12/2022 12:35:00) a BCN T1 (24/12/2022 14:05:30) en asiento 6C (TURISTA) por 100.00€
     public String toString(){
-        return "Billete " + localizador + " para Vuelo " + vuelo.getID() + " de " + vuelo.getOrigen().getCodigo() + vuelo.getTerminalOrigen() + " (" + vuelo.getSalida() + ") a "
-                + vuelo.getDestino().getCodigo() + vuelo.getTerminalDestino() + " (" + vuelo.getLlegada() + ") en asiento " + getAsiento() + " (" + getTipo() +") por " + getPrecio() + "€";
+        return "Billete " + localizador + " para Vuelo " + vuelo.getID() + " de " + vuelo.getOrigen().getCodigo() + vuelo.getTerminalOrigen() + " (" + vuelo.getSalida().toString() + ") a "
+                + vuelo.getDestino().getCodigo() + vuelo.getTerminalDestino() + " (" + vuelo.getLlegada().toString() + ") en asiento " + getAsiento() + " (" + getTipo() +") por " + getPrecio() + "€";
     }
 
     // Cancela este billete, eliminandolo de la lista de billetes del vuelo y del pasajero correspondiente
@@ -101,7 +99,44 @@ public class Billete {
 
     // Imprime la informacion de este billete en un fichero siguiendo el formato de los ejemplos de ejecución del enunciado
     public boolean generarFactura(String fichero) {
-        return false;
+        FileWriter fileWriter = null;
+        boolean facturaGenerada = true;
+        try {
+            fileWriter = new FileWriter(fichero, false);
+            fileWriter.write("--------------------------------------------------\n");
+            fileWriter.write("--------- Factura del billete " + this.localizador + " ---------\n");
+            fileWriter.write("--------------------------------------------------\n");
+            fileWriter.write("Vuelo " + this.getVuelo().getID() + "\n");
+            fileWriter.write("Origen " + this.getVuelo().getOrigen() + " (" + this.getVuelo().getOrigen().getCodigo() + ") T" + this.getVuelo().getTerminalOrigen() + "\n");
+            fileWriter.write("Destino " + this.getVuelo().getOrigen() + " (" + this.getVuelo().getDestino().getCodigo() + ") T" + this.getVuelo().getTerminalDestino() + "\n");
+            fileWriter.write("Salida " + this.getVuelo().getSalida().toString() + "\n");
+            fileWriter.write("Llegada " + this.getVuelo().getLlegada().toString() + "\n");
+            fileWriter.write("Pasajero " + this.getPasajero().toString() + "\n");
+            fileWriter.write("Tipo de billete: " + this.getTipo().name() + "\n"); //el name está bien puesto?
+            fileWriter.write("Asiento " + this.getAsiento() + "\n");
+            fileWriter.write("Precio " + this.getPrecio() + "€");
+        }catch (FileNotFoundException excepcion1){
+            System.out.println("El fichero " + fichero + " no encontrado");
+            facturaGenerada = false;
+        }
+        catch (IOException excepcion2){
+            System.out.println("Error de escritura en fichero " + fichero + ".");
+            facturaGenerada = false;
+        }
+        finally {
+            if (fileWriter != null){
+                try{
+                    fileWriter.close();
+                }catch (IOException excepcion3){
+                        System.out.println("Error de cierre del fichero " + fichero + ".");
+                        facturaGenerada = false;
+                }
+            }
+        }
+        if (facturaGenerada){
+            System.out.println("Factura de Billete " + localizador + " generada en factura.txt");
+        }
+        return facturaGenerada;
     }
 
     // Métodos estáticos
@@ -109,13 +144,13 @@ public class Billete {
     // Genera un localizador de billete. Este consistirá en una cadena de 10 caracteres, de los cuales los seis 
     // primeros será el ID del vuelo asociado y los 4 siguientes serán letras mayúsculas aleatorias. Ejemplo: PM0123ABCD
     // NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.  
-    /*public static String generarLocalizador(Random rand, String idVuelo){
-        String localizador1 = String.valueOf((char)rand.nextInt('A', 'Z'));
-        String localizador2 = String.valueOf((char)rand.nextInt('A', 'Z'));
-        String localizador3 = String.valueOf((char)rand.nextInt('A', 'Z'));
-        String localizador4 = String.valueOf((char)rand.nextInt('A', 'Z'));
-        return idVuelo + localizador1 + localizador2 + localizador3 + localizador4;
-    }*/
+    public static String generarLocalizador(Random rand, String idVuelo){
+        Character posicion1 = (char) ('A' + rand.nextInt(26));
+        Character posicion2 = (char) ('A' + rand.nextInt(26));
+        Character posicion3 = (char) ('A' + rand.nextInt(26));
+        Character posicion4 = (char) ('A' + rand.nextInt(26));
+        return idVuelo + posicion1 + posicion2 + posicion3 + posicion4;
+    }
 
     // Crea un nuevo billete para un vuelo y pasajero específico, pidiendo por teclado los datos necesarios al usuario en el orden y 
     // con los textos indicados en los ejemplos de ejecución del enunciado
@@ -131,11 +166,21 @@ public class Billete {
             numeroFila = Utilidades.leerNumero(teclado, "Ingrese fila del asiento (1-" + vuelo.getAvion().getFilas() + "):", 1, vuelo.getAvion().getFilas());
             columna = (char) (vuelo.getAvion().getColumnas() + 'A' - 1);
             char letraColumna = Utilidades.leerLetra(teclado, "Ingrese columna del asiento (A-" + columna + "):", 'A',columna);
-            asiento = String.valueOf(numeroFila + String.valueOf(letraColumna));
+            asiento = String.valueOf(numeroFila) + letraColumna; //String.valueOf(letraColumna)
             if (vuelo.asientoOcupado(numeroFila, columna))
-                System.out.println("El asiento " +  asiento + " ya esta reservado.");
+                System.out.println("El asiento " +  asiento + " ya está reservado.");
         }while(vuelo.asientoOcupado(numeroFila, columna));
-        String tipo;
+        TIPO tipo;
+        switch (numeroFila){
+            case 1: 
+                tipo = TIPO.PRIMERA; precioBilletes = vuelo.getPrecioPrimera();
+                break;
+            case 2,3,4,5:
+                tipo = TIPO.PREFERENTE; precioBilletes = vuelo.getPrecioPreferente();
+                break;
+            default: tipo = TIPO.TURISTA; precioBilletes = vuelo.getPrecio();
+        }
+    Billete nuevoBillete = new Billete(generarLocalizador(rand, vuelo.getID()), vuelo, pasajero, tipo, numeroFila, vuelo.getAvion().getColumnas(), precioBilletes);
     return null;
     }
 }

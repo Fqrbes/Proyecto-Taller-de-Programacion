@@ -50,7 +50,7 @@ public class ListaBilletes {
     public boolean insertarBillete (Billete billete){
         boolean insertar = false;
         if (!estaLlena()){
-            ListaBilletes[getOcupacion()] = billete;
+            ListaBilletes[ocupacion] = billete;
             ocupacion++;
             insertar = true;
         }
@@ -59,7 +59,7 @@ public class ListaBilletes {
 
     public Billete buscarBillete (String localizador){
         Billete resultado = null;
-        for (int i = 0; i < getOcupacion(); i++){
+        for (int i = 0; i < ocupacion; i++){
             if (ListaBilletes[i].getLocalizador().equals(localizador)){
                 resultado = ListaBilletes[i];
             }
@@ -80,16 +80,15 @@ public class ListaBilletes {
     }
 
     public boolean eliminarBillete (String localizador){
-        boolean eliminado = false;
+        boolean eliminado = true;
         for (int i = 0; i < ocupacion; i++){
             if (ListaBilletes[i].getLocalizador().equals(localizador)){
                 for (int j = i; j < ocupacion-1; j ++){
                     ListaBilletes[i] = ListaBilletes[i+1];
-                    ocupacion--;
-                    eliminado = true;
                 }
             }
         }
+        ocupacion--;
         return eliminado;
     }
 
@@ -118,29 +117,29 @@ public class ListaBilletes {
 
     // Añade los billetes al final de un fichero CSV, sin sobreescribirlo
     public boolean aniadirBilletesCsv(String fichero){
+        FileWriter Filewriter = null;
         boolean billeteAñadido = true;
-        FileWriter Fwriter = null;
         try{
-            Fwriter = new FileWriter(fichero, true);
+            Filewriter = new FileWriter(fichero, true);
             for (int i = 0; i < ocupacion; i ++){
                 Billete billeteActual = ListaBilletes[i];
-                Fwriter.write(billeteActual.getLocalizador() + ";" + billeteActual.getVuelo().getID() + ";" + billeteActual.getPasajero().getDNI() +
+                Filewriter.write(billeteActual.getLocalizador() + ";" + billeteActual.getVuelo().getID() + ";" + billeteActual.getPasajero().getDNI() +
                         ";" + billeteActual.getTipo().name() + ";" + billeteActual.getFila() + ";" + billeteActual.getColumna() + ";" + billeteActual.getPrecio());
                 if (i != ocupacion-1){
-                    Fwriter.write("\n");
+                    Filewriter.write("\n");
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException excepcion) {
             System.out.println("El fichero " + fichero + " no encontrado");
             billeteAñadido = false;
-        } catch (IOException e) {
+        } catch (IOException excepcion2) {
             System.out.println("Error de escritura en " + fichero + ";");
             billeteAñadido = false;
         } finally {
-            if (Fwriter == null){
+            if (Filewriter == null){
                 try {
-                    Fwriter.close();
-                } catch (IOException e){
+                    Filewriter.close();
+                } catch (IOException excepcion3){
                     System.out.println("Error de cierre del fichero " + fichero + ".");
                     billeteAñadido = false;
                 }

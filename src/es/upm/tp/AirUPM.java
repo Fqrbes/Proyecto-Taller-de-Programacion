@@ -67,16 +67,16 @@ public class AirUPM {
     // Almacena los datos de AirUPM en los ficheros CSV especificados
     public boolean guardarDatos(String ficheroAeropuertos, String ficheroAviones, String ficheroVuelos, String ficheroPasajeros, String ficheroBilletes) {
         boolean listasCorrectas = true;
-        if (listaAeropuertos.escribirAeropuertosCsv(ficheroAeropuertos) == false) {
+        if (!listaAeropuertos.escribirAeropuertosCsv(ficheroAeropuertos)) {
             listasCorrectas = false;
         }
-        if (listaAviones.escribirAvionesCsv(ficheroAviones) == false) {
+        if (!listaAviones.escribirAvionesCsv(ficheroAviones)) {
             listasCorrectas = false;
         }
-        if (listaVuelos.escribirVuelosCsv(ficheroVuelos) == false) {
+        if (!listaVuelos.escribirVuelosCsv(ficheroVuelos)) {
             listasCorrectas = false;
         }
-        if (listaPasajeros.escribirPasajerosCsv(ficheroPasajeros) == false) {
+        if (!listaPasajeros.escribirPasajerosCsv(ficheroPasajeros)) {
             listasCorrectas = false;
         }
         return listasCorrectas;
@@ -114,7 +114,9 @@ public class AirUPM {
     // pidiendo por teclado los datos necesarios al usuario en el orden y con los textos indicados en los ejemplos de ejecución del
     // enunciado. Si la lista de pasajeros está vacía, creará un nuevo pasajero, si está llena seleccionará un pasajero, en cualquier
     // otro caso, deberá preguntar al usuario si crear o seleccionar
-    //public void comprarBillete(Scanner teclado, Random rand, Vuelo vuelo);
+    public void comprarBillete(Scanner teclado, Random rand, Vuelo vuelo) {
+
+    }
 
     //Métodos estáticos
 

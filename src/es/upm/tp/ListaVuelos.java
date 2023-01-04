@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class ListaVuelos {
 
     /**
-     * Atrivuto que contiene la capacidad de un vuelo
+     * Atributo que contiene la capacidad de un vuelo
      */
     private int capacidad;
 
@@ -88,34 +88,20 @@ public class ListaVuelos {
 
     //Devuelve un nuevo objeto ListaVuelos conteniendo los vuelos que vayan de un aeropuerto a otro en una determinada fecha
     public ListaVuelos buscarVuelos(String codigoOrigen, String codigoDestino, Fecha fecha){
-        ListaVuelos [] vuelosBuscados = new ListaVuelos[ocupacion];
+        ListaVuelos vuelosBuscados = new ListaVuelos(ocupacion);
 
         for (int i = 0; i < ocupacion; i++){
             if ((codigoOrigen.equals(ListaVuelos[i].getOrigen().getCodigo())) && (codigoDestino.equals(ListaVuelos[i].getDestino().getCodigo()) && (fecha.coincide(ListaVuelos[i].getSalida())))){
-                System.out.println(ListaVuelos[i]);
-
-                //es.upm.tp.Vuelo vuelo;
-                //vuelo = ListaVuelos[i];
-                //vuelosBuscados[i] = vuelo;
-
+                vuelosBuscados.insertarVuelo(ListaVuelos[i]);
             }
         }
-        /*
-        for (int i = 0; i < ocupacion; i++){
-            if (codigoOrigen.equals(ListaVuelos[i].getOrigen().getCodigo())){
-                if (codigoDestino.equals(ListaVuelos[i].getDestino().getCodigo())){
-                    if (fecha.coincide(ListaVuelos[i].getSalida())){
-                        listarVuelos();
-                    }
-                }
-            }
-        }*/
-        return null;
+        return vuelosBuscados;
     }
 
     //Muestra por pantalla los vuelos siguiendo el formato de los ejemplos del enunciado
     public void listarVuelos() {
         for (int i = 0; i < getOcupacion(); i++){
+            //ListaVuelos[i].toString();
             System.out.println(ListaVuelos[i]);
         }
     }
