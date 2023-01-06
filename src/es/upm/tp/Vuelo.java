@@ -9,13 +9,14 @@ import java.util.Scanner;
 /**
  * Vuelo es una clase que encapsula las variables enteras usadas para definir un vuelo concreto
  *
- * @author Cesar Jimenez Laguna
- * @author Iñaki Ramos Iturria
- * @version 1.0
+ * @author      Cesar Jimenez Laguna
+ * @author      Iñaki Ramos Iturria
+ * @version     1.0
  */
 public class Vuelo {
+
     /**
-     * Atributo que contiene la matriz de los asientos de un avion
+     * Atributo que contiene la matriz de los asientos de un avion para un vuelo
      */
     private boolean[][] asientos;
 
@@ -65,6 +66,9 @@ public class Vuelo {
      */
     private double precio;
 
+    /**
+     * Atributo que contiene el array donde se guardan los billetes (comprados o reservados) de un vuelo
+     */
     private ListaBilletes listaBilletesVuelo;
 
     /**
@@ -290,8 +294,9 @@ public class Vuelo {
     }
 
     /**
-     * @param fichero
-     * @return devuelve la lista de billetes del vuelo con la informacion añadida al fichero CSV
+     * Añade los billetes comprados dentro a un fichero.csv
+     * @param fichero es el fichero donde se guardan los billetes comprados de un vuelo
+     * @return Devuelve la lista de billetes del vuelo con la informacion añadida al fichero CSV
      */
     // Añade los billetes al final de un fichero CSV, sin sobreescribirlo
     public boolean aniadirBilletesCsv(String fichero) {
@@ -457,6 +462,17 @@ public class Vuelo {
         return String.format("PM%04d", rand.nextInt(9999));
     }
 
+
+    /**
+     * Funcion que crea y devuelve un objeto vuelo con los datos que selecciona el usuario como los aeropuertos
+     * (de origen y de destino), el avion y los datos del vuelo como la fecha de salida y llegada
+     * @param teclado informacion que afrece el usuario
+     * @param rand parametro que se usa para generar un ID aleatorio
+     * @param aeropuertos aeropuertos, tanto el de origen como el de llegada
+     * @param aviones avion que realiza el vuelo
+     * @param vuelos objeto vuelo que se crea con toda la informacion anterior
+     * @return devuelve el vuelo que se ha creado
+     */
     //Crea y devuelve un objeto Vuelo de los datos que selecciona el usuario de aeropuertos y aviones y la restricción de que
     //no puede estar repetido el identificador, siguiendo las indicaciones del enunciado
     //La función solicita repetidamente los parametros hasta que sean correctos

@@ -1,7 +1,7 @@
 package es.upm.tp;
 
 /**
- * Description of the class
+ * Avion es una clase que encapsula las variables enteras usadas para definir un avion concreto.
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Raos Iturria
@@ -25,12 +25,12 @@ public class Avion {
     private String matricula;
 
     /**
-     * Atributo que contiene las columnas del avion
+     * Atributo que contiene las columnas de asientos del avion
      */
     private int columnas;
 
     /**
-     * Atributo que contiene las filas del avion
+     * Atributo que contiene las filas de asientos del avion
      */
     private int filas;
 
@@ -56,15 +56,18 @@ public class Avion {
         this.filas = filas;
         this. alcance = alcance;
     }
-    /** Devuelve la marca
-     * @return marca
+
+    /**
+     * Getter del atributo marca
+     * @return Devuelve la marca del avion
      */
     public String getMarca() {
         return marca;
     }
 
-    /** Devuelve el modelo
-     * @return modelo
+    /**
+     * Getter del atributo modelo
+     * @return Devuelve el modelo del avion
      */
     public String getModelo() {
     return modelo;
@@ -78,8 +81,9 @@ public class Avion {
         return matricula;
     }
 
-    /** Devuelve las columnas
-     * @return columnas
+    /**
+     * Getter del atributo columnas
+     * @return Devuelve las columnas de los asientos del avion
      */
     public int getColumnas() {
         return columnas;

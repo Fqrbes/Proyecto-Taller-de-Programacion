@@ -14,16 +14,24 @@ import java.util.Scanner;
  */
 public class ListaBilletes {
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private int capacidad;
 
+    /**
+     * Atributo que contiene la ocupacion de un billete dentro de la ListaBilletes
+     */
     private int ocupacion;
 
+    /**
+     * Atributo que contiene el array donde estan los billetes
+     */
     private Billete[] ListaBilletes;
 
     /**
-     * Constructor of the class
-     *
-     * @param capacidad
+     * Constructor que crea un array con la cantidad de billetes recibidos.
+     * @param capacidad especifica la capacidad de la lista que contiene los billetes
      */
     public ListaBilletes(int capacidad){
         this.ocupacion = 0;
@@ -31,10 +39,18 @@ public class ListaBilletes {
         ListaBilletes = new Billete[capacidad];
     }
 
+    /**
+     * Getter del atributo ocupacion
+     * @return devuelve la cantidad de billetes que hay en la listaBilletes como una variable ocupacion
+     */
     public int getOcupacion(){
         return ocupacion;
     }
 
+    /**
+     * Devuelve verdadero si la lista billetes esta llena, si no, devuelve falso
+     *  @return estaLlena
+     */
     public boolean estaLlena(){
         boolean estaLlena = false;
         if (ocupacion == ListaBilletes.length){
@@ -43,6 +59,11 @@ public class ListaBilletes {
         return estaLlena;
     }
 
+    /**
+     * Getter  para conseguir un vuelo
+     * @param i variable que toma la posicion del billete dentro del array
+     * @return Devuelve la posicion (i) de un vuelo dentro del array ListaVuelos
+     */
     public Billete getBillete(int i){
         return ListaBilletes[i];
     }

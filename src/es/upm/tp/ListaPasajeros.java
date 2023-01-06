@@ -7,7 +7,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * ListaPasajeros es una clase que encapsula las variables enteras usadas para definir los pasajeros,
+ * así como también contiene funciones bara buscar, seleccionar e insertar estos mismos pasajeros en el array
+ * de nombre listaPasajeros
+ * Tambien escribe un fichero.csv con los datos de cada pasajero
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
@@ -16,26 +19,22 @@ import java.util.Scanner;
 public class ListaPasajeros {
 
     /**
-     * Atributo que devuelve la capacidad de la lista de pasajeros
+     * Atributo que devuelve la capacidad de la ListaPasajeros
      */
     private int capacidad;
 
-
     /**
-     * Atributo que contiene la ocupacion de la lista de pasajeros
+     * Atributo que contiene la ocupacion de los pasajeros dentro de la lista
      */
     private int ocupacion;
 
-
     /**
-     * Atributo que contiene el vector donde estan los pasajeros
+     * Atributo que contiene el array donde se guardan los pasajeros
      */
     private Pasajero[] listaPasajeros;
 
     /**
-     * Constructor de la clase, crea un vector que contiene la cantidad de pasajeros recibidos que van a abordar
-     * sus respectivos aviones
-     *
+     * Constructor de la clase, crea un vector que contiene la cantidad de pasajeros
      * @param capacidad especifica la capacidad de la lista de pasajeros
      */
     public ListaPasajeros(int capacidad){
@@ -44,14 +43,16 @@ public class ListaPasajeros {
     }
 
     /**
-     * @return Devuelve la cantidad de pasajeros que hay en ListaPasajeros
+     * Getter del atributo ocupacion
+     * @return Devuelve la cantidad de pasajeros que hay en la listaPasajeros como una variable ocupacion
      */
     public int getOcupacion(){
         return ocupacion;
     }
 
-    /** Devuelve verdadero si la listaPasajeros esta llena, si no, devuelve falso
-     * @return especifica verdadero o falso segun como este listaPasajeros
+    /**
+     * Devuelve verdadero si la listaPasajeros esta llena, si no, devuelve falso
+     * @return estaLlena
      */
     public boolean estaLlena(){
         boolean estaLlena = false;
@@ -61,15 +62,17 @@ public class ListaPasajeros {
         return estaLlena;
     }
 
-    /** Devuelve el pasajero que se encuentre en la posicion recibida por el parametro
-     * @param i especifica la posicion del pasajero en la lista
-     * @return devuelve el pasajero pedido por parametro
+    /**
+     * Getter para conseguir al pasajero que se encuentra en la posicion i del array listaPasajeros
+     * @param i especifica la posicion del pasajero dentro del array
+     * @return Devuelve el pasajero que se encuentra en la posicion recibida por el parametro
      */
     public Pasajero getPasajero(int i){
         return listaPasajeros[i];
     }
 
-    /** Inserta un pasajero en el array ListaPasajeros
+    /**
+     * Inserta un pasajero en el array ListaPasajeros
      * @param pasajero Es el pasajero que se quiere insertar en la lista
      * @return devuelve true si se ha insertado el pasajero o false si no se ha añadido
      */
@@ -135,6 +138,11 @@ public class ListaPasajeros {
         return buscarPasajeroDNI(DNI);
     }
 
+    /**
+     * Genera un fichero CSV con la lista de pasajeros
+     * @param fichero Fichero sobre el que se sobreescriben los datos de los pasajeros
+     * @return Devuelve True si se ha sobreescrito el fichero y false si no se ha podido
+     */
     // Genera un fichero CSV con la lista de pasajeros, sobreescribiendolo
     public boolean escribirPasajerosCsv(String fichero){
         PrintWriter printW = null;
@@ -156,6 +164,14 @@ public class ListaPasajeros {
         return copiado;
     }
 
+
+    /**
+     * Funcion que genera una lista con los pasajeros, tomando los datos del fichero Csv
+     * @param fichero fichero donde lee los datos de los vuelos
+     * @param capacidad capacidad del array ListaPasajeros
+     * @param maxBilletesPasajeros cantidad maxima de billetes posibles por pasajeros en un vuelo
+     * @return devuelve la lista que ha creado
+     */
 
     //Métodos estáticos
     // Genera una lista de pasajeros a partir del fichero CSV, usando los límites especificados como argumentos para la capacidad

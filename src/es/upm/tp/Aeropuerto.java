@@ -36,7 +36,7 @@ public class Aeropuerto {
     private int terminales;
 
     /**
-     * Constructor of the class. Constructor que crea un aeropuerto con los parametros recibidos
+     * Constructor que crea un aeropuerto con los parametros que recibe
      *
      * @param nombre especifica el nombre del aeropuerto
      * @param codigo especifica el codigo IATA del aeropuerto
@@ -53,44 +53,50 @@ public class Aeropuerto {
         this.terminales = terminales;
     }
 
-    /** Devuelve el nombre del aeropuerto
-     * @return nombre
+    /**
+     * Getter del atributo nombre
+     * @return Devuelve el nombre del aeropuerto
      */
     public String getNombre() {
         return nombre;
     }
 
-    /** Devuelve el codigo IATA del aeropuerto
-     * @return codigo
+    /**
+     * Getter del atributo codigo
+     * @return Devuelve el codigo IATA del aeropuerto
      */
     public String getCodigo() {
         return codigo;
     }
 
-    /** Devuelve la latitud del aeropuerto
-     * @return latitud
+    /**
+     * Getter del atributo latitud
+     * @return Devuelve la latitud del aeropuerto
      */
     public double getLatitud() {
         return latitud;
     }
 
-    /** Devuelve la longitud del aeropuerto
-     * @return longitud
+    /**
+     * Getter del atributo longitud
+     * @return Devuelve la longitud del aeropuerto
      */
     public double getLongitud() {
         return longitud;
     }
 
-    /** devuelve las terminales del aeropuerto
-     * @return terminales
+    /**
+     * Getter del atributo terminales
+     * @return Devuelve las terminales del aeropuerto
      */
     public int getTerminales() {
         return terminales;
     }
 
-    /** Devuelve la distancia entre dos aeropuertos
-     * @param destino eropuerto de destio, al que llega el avion
-     * @return distancia entre el aeropuerto de salida y de destino
+    /**
+     * Devuelve la distancia entre dos aeropuertos
+     * @param destino aeropuerto de destio al que llega el avion
+     * @return distancia entre el aeropuerto de origen y el aeropuerto de destino
      */
     // Calcula la distancia entre el aeropuerto que recibe el mensaje y el aeropuerto "destino" siguiendo la fórmula del enunciado
     public double distancia(Aeropuerto destino){
@@ -103,7 +109,8 @@ public class Aeropuerto {
         return distancia;
     }
 
-    /** Devuelve los datos del aeropuerto (nombre, codigo, latitud, longitud y numero de terminales)
+    /**
+     * Devuelve los datos caracteristicos de un aeropuerto en un formato especifico, ("Adolfo Suarez Madrid - Barajas(MAD), en (40.4927751 40.4927751), con 4 terminales)")
      * @return nombre, codigo, latitud, longitud y numero de terminales del aeropuerto
      */
     // Crea un String con los datos de un aeropuerto con el siguiente formato:
@@ -112,8 +119,9 @@ public class Aeropuerto {
         return nombre + "(" + codigo + "), en (" + latitud + " " + longitud + "), con " + terminales + " terminales";
     }
 
-    /** Devuelve el nombre del aeropuerto y el codigo IATA
-     * @return nombre y codigo IATA del aeropuerto
+    /**
+     * Devuelve el nombre del aeropuerto y el codigo IATA del mismo, en un formato especifico, ("(Adolfo Suarez Madrid - Barajas(MAD))")
+     * @return nombre y codigo IATA
      */
     // Crea un String con los datos de un aeropuerto con el siguiente formato:
     // Adolfo Suarez Madrid - Barajas(MAD)

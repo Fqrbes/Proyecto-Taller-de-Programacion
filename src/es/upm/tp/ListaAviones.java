@@ -5,7 +5,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * ListaAviones es una clase que encapsula las variables enteras usadas para definir los aviones,
+ * así como también contiene funciones bara buscar, seleccionar e insertar aviones en el array de nombre ListaAviones
+ * Tambien escribe un fichero.csv con los datos de cada avion
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
@@ -14,12 +16,12 @@ import java.util.Scanner;
 public class ListaAviones {
 
     /**
-     * Atributo que devuelve la capacidad del avion
+     * Atributo que devuelve la capacidad de la ListaAvion
      */
     private int capacidad;
 
     /**
-     * Atributo que devuelve la ocupacion del avion
+     * Atributo que devuelve la ocupacion del avion dentro de la lista
      */
     private int ocupacion;
 
@@ -45,8 +47,9 @@ public class ListaAviones {
         return ocupacion;
     }
 
-    /** Devuelve verdadero si la lista aviones esta llena, si no, devuelve falso
-     *  @return especifica verdadero o falso segun como este ListaAviones
+    /**
+     * Devuelve verdadero si la lista aviones esta llena, si no, devuelve falso
+     *  @return estaLlena
      */
     public boolean estaLlena(){
         boolean estaLlena;
@@ -66,7 +69,8 @@ public class ListaAviones {
         return ListaAviones[posicion];
     }
 
-    /** Inserta un avion en el array ListaAviones
+    /**
+     * Inserta un avion en el array ListaAviones
      * @param avion avion que se quiere insertar en la lista
      * @return devuelve true si se ha insertado el avion o false si no se ha añadido
      */
@@ -83,9 +87,10 @@ public class ListaAviones {
         return insertar;
     }
 
-    /** Busca un avion por medio de su matricula
-     * @param matricula codigo que identifica al avion
-     * @return devuelve el avion, introducido por parametro
+    /**
+     * Busca un avion por medio de su matricula
+     * @param matricula codigo que identifica a un avion
+     * @return devuelve el avion correspondiente a la matricula introducida por parametro
      */
     public Avion buscarAvion(String matricula){
         Avion resultado = null;
@@ -128,7 +133,8 @@ public class ListaAviones {
         return avion;
     }
 
-    /** Crea una lista con los aviones y cada uno de sus datos
+    /**
+     * Escribe en un fichero los aviones con sus caracteristicas
      * @param nombre es el nombre del fichero
      * @return devuelve true si se ha copiado en el fichero y false si no se ha podido
      */

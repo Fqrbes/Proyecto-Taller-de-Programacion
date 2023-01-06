@@ -11,26 +11,60 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class AirUPM {
+
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private int maxAeropuertos;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private int maxAviones;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private int maxVuelos;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private int maxPasajeros;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private int maxBilletesPasajeros;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private String aeropuerto, avion, vuelo, pasajeros, billetes;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private ListaAeropuertos listaAeropuertos;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private ListaAviones listaAviones;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private ListaVuelos listaVuelos;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private ListaPasajeros listaPasajeros;
 
+    /**
+     * Atributo que contiene la capacidad de la ListaBilletes
+     */
     private ListaBilletes listaBilletes;
 
     /**
@@ -119,64 +153,29 @@ public class AirUPM {
     public void comprarBillete(Scanner teclado, Random rand, Vuelo vuelo) {
         char respuesta;
         String DNI;
-        Pasajero pasajero = null;
-        Billete nuevoBiellete = null;
+        Pasajero pasajeroVigente = null;
+        Billete billetePasajero = null;
 
         do {
             respuesta = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'a', 'z');
             if (respuesta != 'n' && respuesta != 'e') {
                 System.out.println("El valor de entrada debe ser 'n' o 'e'");
             }
-        } while (respuesta != 'n' && respuesta != 'e');
-
-        if (respuesta == 'e') {
-            do {
-                System.out.print("Ingrese DNI del pasajero:");
-                DNI = teclado.nextLine();
-                if (listaPasajeros.buscarPasajeroDNI(DNI) == null) {
-                    System.out.println("DNI no encontrado.");
-                }
-            } while (listaPasajeros.buscarPasajeroDNI(DNI) == null);
-            nuevoBiellete = Billete.altaBillete(teclado,rand,vuelo,pasajero);
-            //nuevoBiellete = Billete.altaBillete(teclado, rand, vuelo, Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros));
-            if (nuevoBiellete != null) {
-                System.out.println("Billete " + vuelo.getID() + nuevoBiellete.getLocalizador() + " comprado con éxito.");
-            } else {
-                if (respuesta == 'n') {
-                    Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
-                }
+            if (respuesta == 'n'){
+                pasajeroVigente = Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
+                billetePasajero = Billete.altaBillete(teclado, rand, vuelo, pasajeroVigente);
+                System.out.println("Billete " + billetePasajero.getLocalizador() + " comprado con éxito.");
             }
-        }
-
-
-
-        /*do {
-            respuesta = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'a', 'z');
-            if (respuesta == 'n' || respuesta == 'e') {
-                if (respuesta == 'n') {
-                    Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
-                } else {
-                    do {
-                        System.out.print("Ingrese DNI del pasajero:");
-                        DNI = teclado.nextLine();
-                        pasajero = listaPasajeros.seleccionarPasajero(teclado, );
-                        if (listaPasajeros.buscarPasajeroDNI(DNI) == null) {
-                            System.out.println("DNI no encontrado.");
-                        }
-                    } while (listaPasajeros.buscarPasajeroDNI(DNI) == null);
+            if (respuesta == 'e'){
+                pasajeroVigente = listaPasajeros.seleccionarPasajero(teclado, "Ingrese DNI del pasajero:");
+                if (pasajeroVigente.maxBilletesAlcanzado()){
+                    System.out.println("El Pasajero seleccionado no puede adquierir más billetes.");
+                } else{
+                    billetePasajero = Billete.altaBillete(teclado, rand, vuelo, pasajeroVigente);
+                    System.out.println("Billete " + billetePasajero.getLocalizador() + " comprado con éxito.");
                 }
-                Billete nuevoBiellete = null;
-                nuevoBiellete = Billete.altaBillete(teclado, rand, vuelo, Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros));
-                if (nuevoBiellete != null) {
-                    System.out.println("Billete " + vuelo.getID() + nuevoBiellete.getLocalizador() + " comprado con éxito.");
-                }
-            }
-            if (respuesta != 'n' && respuesta != 'e') {
-                System.out.println("El valor de entrada debe ser 'n' o 'e'");
             }
         } while (respuesta != 'n' && respuesta != 'e');
-
-         */
     }
 
     //Métodos estáticos
@@ -222,7 +221,6 @@ public class AirUPM {
                             Pasajero nuevoPasajero = Pasajero.altaPasajero(scanner, airUPM.listaPasajeros, airUPM.maxBilletesPasajeros);
                             if (airUPM.insertarPasajero(nuevoPasajero)) {
                                 System.out.printf("Pasajero con DNI %08d" + nuevoPasajero.getLetraDNI() + " dado de alta con éxito.\n", nuevoPasajero.getNumeroDNI());
-                                //System.out.printf("Pasajero con DNI " + nuevoPasajero.getDNI() + " dado de alta con éxito.\n");
                                 //Juan Alberto
                                 //García Gámez
                                 //ja.garcia@alumnos.upm.es

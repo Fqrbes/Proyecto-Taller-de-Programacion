@@ -7,22 +7,62 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Billete es una clase que encapsula las variables enteras usadas para definir un billete concreto
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
  * @version     1.0
  */
 public class Billete {
+
+    /**
+     * Atributo que contiene el enumerador TIPO, con los distintos tipos de billetes para comprar por los pasajeros
+     */
     enum TIPO { TURISTA, PREFERENTE, PRIMERA }
+
+    /**
+     * Atributo que contiene el localizador de un billete
+     */
     private String localizador;
+
+    /**
+     * Atributo que contiene el vuelo de donde se ha comprado un billete
+     */
     private Vuelo vuelo;
+
+    /**
+     * Atributo que contiene el pasajero que compro un billete
+     */
     private Pasajero pasajero;
+
+    /**
+     * Atributo que contiene el tipo de billete comprado (TURISTA, PREFERENTE, PRIMERA)
+     */
     private TIPO tipo;
+
+    /**
+     * Atributo que contiene la fila del billete comprado
+     */
     private int fila;
+
+    /**
+     * Atributo que contiene la columna del billete comprado
+     */
     private int columna;
+
+    /**
+     * Atributo que contiene el precio del billete comprado
+     */
     private double precio;
+
+    /**
+     * Atributo que contiene el la ocupacion del billete comprado
+     */
     private int ocupacion;
+
+    /**
+     * Atributo que contiene el array donde se guardan los billetes (comprados o reservados) de un vuelo
+     */
     private ListaBilletes listaBilletesVuelo;
 
     /**
@@ -48,30 +88,58 @@ public class Billete {
         listaBilletesVuelo = new ListaBilletes(vuelo.getAvion().getFilas() * vuelo.getAvion().getColumnas());
     }
 
+    /**
+     * Getter del atributo localizador
+     * @return Devuelve el localizador de un billete
+     */
     public String getLocalizador(){
         return localizador;
     }
 
+    /**
+     * Getter del atributo vuelo
+     * @return Devuelve el vuelo del billete comprado
+     */
     public Vuelo getVuelo(){
         return vuelo;
     }
 
+    /**
+     * Getter del atributo pasajero
+     * @return Devuelve el pasajero que compro el billete
+     */
     public Pasajero getPasajero(){
         return pasajero;
     }
 
+    /**
+     * Getter del atributo tipo
+     * @return Devuelve el tipo de billete comprado
+     */
     public TIPO getTipo(){
         return tipo;
     }
 
+    /**
+     * Getter del atributo fil
+     * @return Devuelve la fila del asiento del billete comprado
+     */
     public int getFila(){
         return fila;
     }
 
+    /**
+     * Getter del atributo columna
+     * @return Devuelve la columna del asiento del billete comprado
+     */
     public int getColumna(){
         return columna;
     }
 
+    /**
+     * Getter del para conseguir un asiento dependiendo de una fila y una columna
+     * @return Devuelve el asiento de un pasajero dependiendo de la fila y la columna seleccionada
+     */
     // Ejemplos: "1A" para el asiento con fila 1 y columna 1, "3D" para el asiento con fila 3 y columna 4
     public String getAsiento(){
         char [] columna = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' , 'J', 'K', 'L' ,'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
@@ -80,6 +148,10 @@ public class Billete {
         //String asiento = getFila() + "" + columna[numcolumna-1];
     }
 
+    /**
+     * Getter del atributo precio
+     * @return Devuelve el precio de un billete (dependiedo del tipo del mismo comprado)
+     */
     public double getPrecio(){
         if (tipo == TIPO.PRIMERA){
             precio = precio * 1.5;

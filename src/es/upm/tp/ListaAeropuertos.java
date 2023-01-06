@@ -17,12 +17,12 @@ import java.util.Scanner;
     public class ListaAeropuertos {
 
     /**
-     * Atributo que devuelve la capacidad del aeropuerto
+     * Atributo que devuelve la capacidad de la ListaAeropuerto
      */
     private int capacidad;
 
     /**
-     * Atributo que contiene la ocupacion del aeropuerto
+     * Atributo que contiene la ocupacion del aeropuerto dentro de la lista
      */
     private int ocupacion;
 
@@ -32,8 +32,7 @@ import java.util.Scanner;
     private Aeropuerto[] listaAeropuertos;
 
     /**
-     * Constructor of the class. Constructor que crea un vector con la cantidad de aeropuertos recibidos
-     *
+     * Constructor que crea un array con la cantidad de aeropuertos recibidos
      * @param capacidad especifica la capacidad del aeropuerto
      */
     public ListaAeropuertos(int capacidad){
@@ -61,8 +60,6 @@ import java.util.Scanner;
             estaLlena = false;
         }
         return estaLlena;
-
-        //capacidad == ocupacion;
     }
 
     /**
@@ -74,10 +71,10 @@ import java.util.Scanner;
         return listaAeropuertos[i];
     }
 
-
-    /** Inserta un aeropuerto en el array ListaAeropuertos
-     * @param aeropuerto Es el aeropuerto que se quiere insertar en la lista
-     * @return devuelve true si se ha insertado el aeropuerto o false si no se ha añadido
+    /**
+     * Inserta un aeropuerto en el array ListaAeropuertos
+     * @param aeropuerto es el aeropuerto que se quiere insertar en la lista
+     * @return devuelve true si se ha insertado el aeropuerto o false si no se ha añadido correctamente
      */
     public boolean insertarAeropuerto(Aeropuerto aeropuerto){ //añadir a la lista el aeropuerto, si esta no esta llena.
         boolean insertar = false;
@@ -92,7 +89,8 @@ import java.util.Scanner;
         return insertar;
     }
 
-    /** Devuelve el aeropuerto que coincide, con el pedido por parametros
+    /**
+     * Devuelve el aeropuerto que coincide con el pedido por los parametros
      * @param codigo especifica que aeropuerto se esta considerando y comparando para ver si existe
      * @return devuelve el aeropuerto que coincide con el codigo pedido por parametro
      */
@@ -106,8 +104,9 @@ import java.util.Scanner;
         return resultado;
     }
 
-    /** Selecciona el aeropuerto existente que coincide con el codigo solicitado
-     * @param teclado codigo que introduce el usuario
+    /**
+     * Selecciona el aeropuerto existente que coincide con el codigo solicitado
+     * @param teclado codigo IATA que introduce el usuario
      * @param mensaje mensaje que se muestra por pantalla
      * @return devuelve el aeropuerto, si este existe
      */
@@ -127,7 +126,8 @@ import java.util.Scanner;
             return buscarAeropuerto(codigoIATA);
         }
 
-    /** Crea una lista con todos los aeropuertos y sus datos, que se van introduciendo
+    /**
+     * Escribe en un fichero los aeropuertos con sus caracteristicas
      * @param nombre nombre del fichero donde se guarda la lista de aeropuerto
      * @return devuelve la lista con la informacion de los aeropuertos
      */
@@ -167,8 +167,10 @@ import java.util.Scanner;
         String entrada;
         try{
             teclado = new Scanner(new FileReader(fichero));
-            String codigo, nombre;
-            double latitud, longitud;
+            String codigo;
+            String nombre;
+            double latitud;
+            double longitud;
             int terminales;
             do{
                 entrada = teclado.nextLine();

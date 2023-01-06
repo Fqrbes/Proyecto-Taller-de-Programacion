@@ -3,14 +3,26 @@ package es.upm.tp;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Utilidades es una clase con la funcionalidad de leer numeros (fecha) y letras dependiendo del tipo de variable (int, double...).
+ * Clase utilizada para numeros de tipo int long y double y asi como para leer letras de tipo char.
+ * Se recomienda utilizar esta clase para definir cifras, mensajes, asi como fechas (siendo estas introducidas por un usuario)
+ * como la fecha de salida o llegada de un vuelo.
  *
- * @author      Cesar Jimenez Laguna
- * @author      Iñaki Ramos Iturria
- * @version     1.0
+ * @author Cesar Jimenez Laguna
+ * @author Iñaki Ramos Iturria
+ * @version 1.0
  */
 
 public class Utilidades {
+
+    /**
+     * Funcion que lee un numero de tipo int pasado por parametro
+     * @param teclado Teclado por donde el usuario ficilita la informacion
+     * @param mensaje Mensaje que se le muestra al usuario de la informacion que tiene que aportar
+     * @param minimo limite inferior que se permite de los datos pasados por parametro
+     * @param maximo limite superior que se permite de los datos pasados por parametro
+     * @return Devuelve el caracter que cumple los limites y que ha introducido el usuario
+     */
     // Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int num;
@@ -21,6 +33,14 @@ public class Utilidades {
         return num;
     }
 
+    /**
+     * Funcion que lee un numero de tipo long pasado por parametro
+     * @param teclado Teclado por donde el usuario ficilita la informacion
+     * @param mensaje Mensaje que se le muestra al usuario de la informacion que tiene que aportar
+     * @param minimo limite inferior que se permite de los datos pasados por parametro
+     * @param maximo limite superior que se permite de los datos pasados por parametro
+     * @return Devuelve el caracter que cumple los limites y que ha introducido el usuario
+     */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long num;
         do {
@@ -30,6 +50,14 @@ public class Utilidades {
         return num;
     }
 
+    /**
+     * Funcion que lee un numero de tipo double pasado por parametro
+     * @param teclado Teclado por donde el usuario ficilita la informacion
+     * @param mensaje Mensaje que se le muestra al usuario de la informacion que tiene que aportar
+     * @param minimo limite inferior que se permite de los datos pasados por parametro
+     * @param maximo limite superior que se permite de los datos pasados por parametro
+     * @return Devuelve el caracter que cumple los limites y que ha introducido el usuario
+     */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double num;
         do {
