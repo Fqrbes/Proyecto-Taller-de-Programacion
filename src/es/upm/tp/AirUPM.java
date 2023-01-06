@@ -63,6 +63,7 @@ public class AirUPM {
         listaAviones = ListaAviones.leerAvionesCsv(ficheroAviones, maxAviones);
         listaVuelos = ListaVuelos.leerVuelosCsv(ficheroVuelos, maxVuelos, listaAeropuertos, listaAviones);
         listaPasajeros = ListaPasajeros.leerPasajerosCsv(ficheroPasajeros, maxPasajeros, maxBilletesPasajeros);
+        ListaBilletes.leerBilletesCsv(ficheroBilletes, listaVuelos, listaPasajeros);
     }
 
     // Almacena los datos de AirUPM en los ficheros CSV especificados
@@ -115,40 +116,66 @@ public class AirUPM {
     // enunciado. Si la lista de pasajeros está vacía, creará un nuevo pasajero, si está llena seleccionará un pasajero, en cualquier
     // otro caso, deberá preguntar al usuario si crear o seleccionar
     public void comprarBillete(Scanner teclado, Random rand, Vuelo vuelo) {
-        String respuesta;
+        char respuesta;
         String DNI;
+        Pasajero pasajero = null;
+        Billete nuevoBiellete = null;
+
         do {
-            System.out.print("¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?");
-            respuesta = teclado.nextLine();
-            if (!respuesta.equals("n") && !respuesta.equals("e")) {
+            respuesta = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'a', 'z');
+            if (respuesta != 'n' && respuesta != 'e') {
                 System.out.println("El valor de entrada debe ser 'n' o 'e'");
             }
-        } while (!respuesta.equals("n") && !respuesta.equals("e"));
+        } while (respuesta != 'n' && respuesta != 'e');
 
-        if (respuesta.equals("n")) {
-            Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
-        }
-        else {
-            long numDNI;
-            char letraDNI;
+        if (respuesta == 'e') {
             do {
                 System.out.print("Ingrese DNI del pasajero:");
                 DNI = teclado.nextLine();
-                numDNI = Long.parseLong(DNI.substring(0, 7));
-                letraDNI = DNI.charAt(8);
-                //llamar a buscarPasajeroDNI (String DNI)
-                //if (ListaPasajeros.leerPasajerosCsv(fichero,capacidad, maxBilletesPasajeros));
-                if (!Pasajero.correctoDNI(numDNI, letraDNI)) {
+                if (listaPasajeros.buscarPasajeroDNI(DNI) == null) {
                     System.out.println("DNI no encontrado.");
                 }
-            } while (!Pasajero.correctoDNI(numDNI, letraDNI));
-            //34526179M
+            } while (listaPasajeros.buscarPasajeroDNI(DNI) == null);
+            nuevoBiellete = Billete.altaBillete(teclado,rand,vuelo,pasajero);
+            //nuevoBiellete = Billete.altaBillete(teclado, rand, vuelo, Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros));
+            if (nuevoBiellete != null) {
+                System.out.println("Billete " + vuelo.getID() + nuevoBiellete.getLocalizador() + " comprado con éxito.");
+            } else {
+                if (respuesta == 'n') {
+                    Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
+                }
+            }
         }
-        Billete nuevoBiellete = null;
-        nuevoBiellete = Billete.altaBillete(teclado,rand,vuelo,Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros));
-        if (nuevoBiellete != null){
-            System.out.println("Billete " + vuelo.getID() + nuevoBiellete.getLocalizador() + " comprado con éxito.");
-        }
+
+
+
+        /*do {
+            respuesta = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'a', 'z');
+            if (respuesta == 'n' || respuesta == 'e') {
+                if (respuesta == 'n') {
+                    Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
+                } else {
+                    do {
+                        System.out.print("Ingrese DNI del pasajero:");
+                        DNI = teclado.nextLine();
+                        pasajero = listaPasajeros.seleccionarPasajero(teclado, );
+                        if (listaPasajeros.buscarPasajeroDNI(DNI) == null) {
+                            System.out.println("DNI no encontrado.");
+                        }
+                    } while (listaPasajeros.buscarPasajeroDNI(DNI) == null);
+                }
+                Billete nuevoBiellete = null;
+                nuevoBiellete = Billete.altaBillete(teclado, rand, vuelo, Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros));
+                if (nuevoBiellete != null) {
+                    System.out.println("Billete " + vuelo.getID() + nuevoBiellete.getLocalizador() + " comprado con éxito.");
+                }
+            }
+            if (respuesta != 'n' && respuesta != 'e') {
+                System.out.println("El valor de entrada debe ser 'n' o 'e'");
+            }
+        } while (respuesta != 'n' && respuesta != 'e');
+
+         */
     }
 
     //Métodos estáticos
@@ -245,7 +272,6 @@ public class AirUPM {
                             System.out.println("Lista de pasajeros del Vuelo " + vueloActual.getID() + "generada en " + rutaPasajeros);
                         }
                         break;
-
                     case 0:
                         salir = true;
                         //airUPM.guardarDatos(airUPM.aeropuerto, airUPM.avion, airUPM.vuelo, airUPM.pasajeros, airUPM.billetes);

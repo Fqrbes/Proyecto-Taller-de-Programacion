@@ -179,8 +179,8 @@ public class ListaAviones {
                 marca = matrizAvion[0];
                 modelo = matrizAvion[1];
                 matricula = matrizAvion[2];
-                columnas = Integer.parseInt(matrizAvion[3]);
-                filas = Integer.parseInt(matrizAvion[4]);
+                filas = Integer.parseInt(matrizAvion[3]);
+                columnas = Integer.parseInt(matrizAvion[4]);
                 alcance = Double.parseDouble(matrizAvion[5]);
                 ListaAvionesCsv.insertarAvion(new Avion(marca, modelo, matricula, columnas, filas, alcance));
             }while(teclado.hasNext());

@@ -62,7 +62,7 @@ public class Pasajero {
 
     // Ejemplo: 00123456S
     public String getDNI(){
-        return String.valueOf(numeroDNI) + letraDNI;
+        return String.format("%08d",numeroDNI) + letraDNI; //rellena con 0s
     }
 
     public String getEmail(){

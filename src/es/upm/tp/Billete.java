@@ -45,7 +45,7 @@ public class Billete {
         this.columna = columna;
         this.precio = precio;
         ocupacion = 0;
-        listaBilletesVuelo = new ListaBilletes(ocupacion);
+        listaBilletesVuelo = new ListaBilletes(vuelo.getAvion().getFilas() * vuelo.getAvion().getColumnas());
     }
 
     public String getLocalizador(){
@@ -182,9 +182,9 @@ public class Billete {
             columna = (char) (vuelo.getAvion().getColumnas() + 'A' - 1);
             char letraColumna = Utilidades.leerLetra(teclado, "Ingrese columna del asiento (A-" + columna + "):", 'A',columna);
             asiento = String.valueOf(numeroFila) + letraColumna; //String.valueOf(letraColumna)
-            if (vuelo.asientoOcupado(numeroFila, columna))
+            if (vuelo.asientoOcupado(numeroFila, columna - 64))
                 System.out.println("El asiento " +  asiento + " ya está reservado.");
-        }while(vuelo.asientoOcupado(numeroFila, columna));
+        }while(vuelo.asientoOcupado(numeroFila, columna - 64));
         TIPO tipo;
         switch (numeroFila){
             case 1: 
@@ -195,7 +195,8 @@ public class Billete {
                 break;
             default: tipo = TIPO.TURISTA; precioBilletes = vuelo.getPrecio();
         }
-    Billete nuevoBillete = new Billete(generarLocalizador(rand, vuelo.getID()), vuelo, pasajero, tipo, numeroFila, vuelo.getAvion().getColumnas(), precioBilletes);
-    return null;
+        Billete nuevoBillete = new Billete(generarLocalizador(rand, vuelo.getID()), vuelo, pasajero, tipo, numeroFila, vuelo.getAvion().getColumnas(), precioBilletes);
+        System.out.println("Billete " + nuevoBillete.getLocalizador() + " comprado con éxito.");
+        return null;
     }
 }

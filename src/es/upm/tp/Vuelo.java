@@ -185,9 +185,8 @@ public class Vuelo {
      */
     public int numAsientosLibres() {
         int asientosLibres = 0;
-        Avion resultado = null;
-        for (int i =0; i < avion.getFilas(); i++) {
-            for (int j = 0; j < avion.getColumnas(); j++) {
+        for (int i = 1; i <= avion.getFilas(); i++) {
+            for (int j = 1; j <= avion.getColumnas(); j++) {
                 if (!asientoOcupado(i, j)) {       //False no esta ocupado, true si lo esta.
                     asientosLibres++;
                 }
@@ -214,8 +213,7 @@ public class Vuelo {
      */
     public boolean asientoOcupado(int fila, int columna) {
         boolean ocupado = false;
-        if (asientos[fila][columna]) {
-            asientos[fila][columna] = false;
+        if (asientos[fila - 1][columna - 1]) {//Como la matriz asientos empieza en 0 hay que quitarle 1 porque si no este if impieza en 1
             ocupado = true;
         }
         return ocupado;
@@ -225,7 +223,7 @@ public class Vuelo {
      * @param localizador
      * @return Devuelve la ubicacion del billete buscado
      */
-    public Billete buscarBillete(String localizador){
+    public Billete buscarBillete(String localizador) {
         Billete localizado = null;
         localizado = listaBilletesVuelo.buscarBillete(localizador);
         return localizado;
@@ -239,7 +237,7 @@ public class Vuelo {
      */
     //Devuelve el obejeto billete que corresponde con una fila o columna,
     //Devolverá null si está libre o se excede en el límite de fila y columna
-    public Billete buscarBillete(int fila, int columna){
+    public Billete buscarBillete(int fila, int columna) {
         Billete localizado = null;
         localizado = listaBilletesVuelo.buscarBillete(getID(), fila, columna);
         return localizado;
@@ -252,8 +250,8 @@ public class Vuelo {
     //Si está desocupado el asiento que indica el billete, lo pone ocupado y devuelve true, si no devuelve false
     public boolean ocuparAsiento(Billete billete) {
         boolean ocupado = false;
-        if (!asientoOcupado(billete.getFila(), billete.getColumna())){
-            asientos[billete.getFila()][billete.getColumna()] = true; //true de ocupado
+        if (!asientoOcupado(billete.getFila(), billete.getColumna())) {
+            asientos[billete.getFila() - 1][billete.getColumna() - 1] = true; //true de ocupado
             ocupado = true;
         }
         return ocupado;
@@ -264,11 +262,11 @@ public class Vuelo {
      * @return Devuelve que un asiento esta desocupado a traves del localizador
      */
     //A traves del localizador de billete, se desocupará el asiento
-    public boolean desocuparAsiento(String localizador){
+    public boolean desocuparAsiento(String localizador) {
         boolean desocupado = false;
         Billete billete = buscarBillete(localizador);
-        if (asientoOcupado(billete.getFila(), billete.getColumna())){
-            asientos[billete.getFila()][billete.getColumna()] = false;
+        if (asientoOcupado(billete.getFila(), billete.getColumna())) {
+            asientos[billete.getFila()-1][billete.getColumna()-1] = false;
             desocupado = true;
         }
         return desocupado;
@@ -279,7 +277,7 @@ public class Vuelo {
      * @return devuelve la lista de billetes del vuelo con la informacion añadida al fichero CSV
      */
     // Añade los billetes al final de un fichero CSV, sin sobreescribirlo
-    public boolean aniadirBilletesCsv(String fichero){
+    public boolean aniadirBilletesCsv(String fichero) {
         return listaBilletesVuelo.aniadirBilletesCsv(fichero);
     }
 
@@ -291,7 +289,7 @@ public class Vuelo {
     //Ejemplo: Vuelo PM0066 de Josep Tarradellas Barcelona-El Prat(BCN) T2 (01/01/2023 08:15:00) a Gran Canaria(LPA) T1 (01/01/2023 11:00:05) en Boeing 747(EC-LKD) por 182,52€, asientos libres: 409
     public String toString() {
         return "Vuelo " + id + " de " + origen.getNombre() + "(" + origen.getCodigo() + ") T" + terminalOrigen + " (" + salida.toString() + ") a "
-                + destino.getNombre() + "(" + destino.getCodigo() + ") T" + terminalDestino + " (" + llegada.toString() + ") en " + avion.getMarca() +" " + avion.getModelo()
+                + destino.getNombre() + "(" + destino.getCodigo() + ") T" + terminalDestino + " (" + llegada.toString() + ") en " + avion.getMarca() + " " + avion.getModelo()
                 + "(" + avion.getMatricula() + ") por " + precio + "€, asientos libres: " + numAsientosLibres();
     }
 
@@ -324,11 +322,41 @@ public class Vuelo {
     // 9[ ][X][ ][ ][ ][X]
     //10[ ][ ][ ][ ][ ][ ]
     public void imprimirMatrizAsientos() {
-        for (int i = 0; i < avion.getFilas(); i++) {
-            System.out.println();
-            for (int j = 0; j < avion.getColumnas(); j++) {
-                System.out.println(asientos[i + 1][j + 1]);
+        System.out.print("    ");
+        for (int i = 1; i <= avion.getColumnas(); i++) {
+            System.out.printf("%c  ", 64 + i);
+        }
+        System.out.println();
+        System.out.printf("  1");
+        for (int j = 1; j <= avion.getColumnas(); j++) {
+            if (asientoOcupado(1, j)) {
+                System.out.print("(X)");
+            } else {
+                System.out.print("( )");
             }
+        }
+        System.out.println();
+        for (int f = 2; f < 6; f++) {
+            System.out.printf(" %2d", f);
+            for (int c = 1; c <= avion.getColumnas(); c++){
+                if (asientoOcupado(f, c)) {
+                    System.out.print("{X}");
+                } else {
+                    System.out.print("{ }");
+                }
+            }
+            System.out.println();
+        }
+        for (int f = 6; f <= avion.getFilas(); f++) {
+            System.out.printf(" %2d", f);
+            for (int c = 1; c <= avion.getColumnas(); c++){
+                if (asientoOcupado(f, c)) {
+                    System.out.print("[X]");
+                } else {
+                    System.out.print("[ ]");
+                }
+            }
+            System.out.println();
         }
     }
 
@@ -337,34 +365,30 @@ public class Vuelo {
         boolean ficheroActualizado = false;
         Billete billete = null;
         FileWriter fileWriter = null;
-        char [] letraAsiento = {'A', 'B', 'C', 'D', 'E', 'F'};
+        char[] letraAsiento = {'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             fileWriter = new FileWriter(fichero, true);
             fileWriter.write("--------------------------------------------------\n");
             fileWriter.write("--------- Lista de pasajeros en vuelo " + this.id + " ---------\n");
             fileWriter.write("--------------------------------------------------\n");
             fileWriter.write("Asiento Tipo        Pasajero");
-            for (int i = 0; i < 10; i++){
-                for (int j = 0; j < 6; j++){
-                    if (asientos[i + 1][j + 1]){
-
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 6; j++) {
+                    if (asientos[i + 1][j + 1]) {
                         fileWriter.write(i + "" + letraAsiento[j] + "       " + (billete.getTipo() == Billete.TIPO.PREFERENTE ? billete.getTipo().toString() : billete.getTipo().toString() + "   ") + "  " +
                                 billete.getPasajero().toString());
-                    }
-                    else {
+                    } else {
                         fileWriter.write(i + "" + letraAsiento[j]);
                     }
                 }
             }
-        }catch (FileNotFoundException excepcion1){
+        } catch (FileNotFoundException excepcion1) {
             System.out.println("El fichero " + fichero + " no encontrado");
             ficheroActualizado = false;
-        }
-        catch (IOException excepcion2){
+        } catch (IOException excepcion2) {
             System.out.println("Error de escritura en fichero " + fichero + ".");
             ficheroActualizado = false;
-        }
-        finally {
+        } finally {
             if (fileWriter != null) {
                 try {
                     fileWriter.close();
@@ -395,12 +419,12 @@ public class Vuelo {
         String vueloID;
         do {
             vueloID = generarID(rand);
-            for (int i = 0; i < vuelos.getOcupacion(); i++){
+            for (int i = 0; i < vuelos.getOcupacion(); i++) {
                 if (vueloID.equals(vuelos.getVuelo(i).getID())) {
                     vueloCorrecto = true;
                 }
             }
-        }while(!vueloCorrecto);
+        } while (!vueloCorrecto);
 
         Aeropuerto origen = aeropuertos.seleccionarAeropuerto(teclado, "Ingrese código de Aeropuerto Origen:");
         String primerMensaje = "Ingrese Terminal Origen (1 - " + origen.getTerminales() + "):";
