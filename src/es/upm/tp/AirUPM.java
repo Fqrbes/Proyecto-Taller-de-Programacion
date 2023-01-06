@@ -32,7 +32,7 @@ public class AirUPM {
 
     private ListaPasajeros listaPasajeros;
 
-    //private Billetes[] listaBilletes;
+    private ListaBilletes listaBilletes;
 
     /**
      * Constructor of the class
@@ -81,6 +81,9 @@ public class AirUPM {
         if (!listaPasajeros.escribirPasajerosCsv(ficheroPasajeros)) {
             listasCorrectas = false;
         }
+        if (!listaBilletes.aniadirBilletesCsv(ficheroBilletes)) {
+            listasCorrectas = false;
+        }
         return listasCorrectas;
     }
 
@@ -107,7 +110,6 @@ public class AirUPM {
         Aeropuerto aeropuertoOrigen = listaAeropuertos.seleccionarAeropuerto(teclado, "Ingrese código de Aeropuerto Origen:");
         Aeropuerto aeropuertoDestino = listaAeropuertos.seleccionarAeropuerto(teclado, "Ingrese código de Aeropuerto Destino:");
         Fecha fechaSalidaVuelo = Utilidades.leerFecha(teclado, "Fecha de Salida:");
-
         return listaVuelos.buscarVuelos(aeropuertoOrigen.getCodigo(), aeropuertoDestino.getCodigo(), fechaSalidaVuelo);
     }
 

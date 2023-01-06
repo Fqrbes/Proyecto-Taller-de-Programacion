@@ -14,8 +14,6 @@ import java.util.Scanner;
  * @version     1.0
  */
 public class ListaPasajeros {
-    //Atributos privados, todos
-
 
     /**
      * Atributo que devuelve la capacidad de la lista de pasajeros

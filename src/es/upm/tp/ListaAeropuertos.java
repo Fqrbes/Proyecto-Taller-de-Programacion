@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 
     public class ListaAeropuertos {
-        //Atributos privados, todos.
 
     /**
      * Atributo que devuelve la capacidad del aeropuerto

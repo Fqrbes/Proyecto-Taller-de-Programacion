@@ -9,7 +9,6 @@ package es.upm.tp;
  */
 
 public class Aeropuerto {
-    // Atributos privados, todos.
 
     /**
      * Atributo que contiene el nombre del aeropuerto
@@ -37,7 +36,7 @@ public class Aeropuerto {
     private int terminales;
 
     /**
-     * Constructor of the class. Constructor que crea un aeropuerto con los datos que recibe
+     * Constructor of the class. Constructor que crea un aeropuerto con los parametros recibidos
      *
      * @param nombre especifica el nombre del aeropuerto
      * @param codigo especifica el codigo IATA del aeropuerto
