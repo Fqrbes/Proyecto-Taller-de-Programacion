@@ -40,16 +40,14 @@ public class Avion {
     private double alcance;
 
     /**
-     * Constructor of the class. Constructor que crea un avion con los parametros (marca, modelo, matricula, columnas, filas y alcance) que recibe
-     *
-     * @param marca especifica marca del avion
+     * Constructor que crea un avion con los parametros recibidos (marca, modelo, matricula, columnas, filas y alcance)
+     * @param marca especifica la marca del avion
      * @param modelo especifica el modelo del avion
      * @param matricula especifica la matricula del avion
-     * @param columnas especifica columnas del avion
-     * @param filas especifica las filas del avion
-     * @param alcance especifica el alcanze del avion
+     * @param columnas especifica columnas que tiene el avion
+     * @param filas especifica las filas que tiene el avion
+     * @param alcance especifica el alcance maximo del avion
      */
-
     public Avion(String marca, String modelo, String matricula, int columnas, int filas, double alcance){
         this.marca = marca;
         this.modelo = modelo;
@@ -72,8 +70,9 @@ public class Avion {
     return modelo;
     }
 
-    /** Devuelve la matricula
-     * @return matricula
+    /**
+     * Getter del atributo matricula
+     * @return Devuelve la matricula del avion
      */
     public String getMatricula() {
         return matricula;
@@ -86,22 +85,25 @@ public class Avion {
         return columnas;
     }
 
-    /** Devuelve las filas
-     * @return filas
+    /**
+     * Getter del atributo filas
+     * @return Devuelve las filas de los asientos del avion
      */
     public int getFilas() {
         return filas;
     }
 
-    /** Devuelve el alcance
-     * @return alcance
+    /**
+     * Getter del atributo alcance
+     * @return Devuelve el alcance maximo del avion
      */
     public double getAlcance() {
         return alcance;
     }
 
-    /** Devuelve los datos del un avion
-     * @return marca, modelo, matricula, asientos (columnas*filas) y alcance
+    /**
+     * Devuelve los datos del un avion en un formato especifico, ("(Boeing 737(EC-LKE): 180 asientos, hasta 5700.0 km)")
+     * @return marca, modelo, matricula, asientos (columnas*filas) y alcance maximo
      */
     // Crea un String con los datos de un avión con el siguiente formato:
     // Boeing 737(EC-LKE): 180 asientos, hasta 5700.0 km
@@ -109,7 +111,8 @@ public class Avion {
         return marca + " " + modelo + "(" + matricula + "): " + columnas * filas + " asientos, hasta " + alcance + " km";
     }
 
-    /** Devuelve los datos de un avion
+    /**
+     * Devuelve los datos de un avion en un formato especifico, ("(Boeing 737(EC-LKE))")
      * @return marca, modelo y matricula
      */
     // Crea un String con los datos de un avión con el siguiente formato:

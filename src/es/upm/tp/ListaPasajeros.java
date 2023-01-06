@@ -84,8 +84,9 @@ public class ListaPasajeros {
     }
 
     /**
-     * @param dni
-     * @return
+     * Funcion que busca a un pasajero por medio de su DNI pasado por parametro
+     * @param dni DNI que esta asociado a un pasajero
+     * @return Devuelve el pasajero que coincide con el DNI
      */
     public Pasajero buscarPasajeroDNI(String dni){
         Pasajero resultado = null;
@@ -100,8 +101,9 @@ public class ListaPasajeros {
     }
 
     /**
-     * @param email
-     * @return
+     * Funcion que busca a un pasajero por medio de su email pasado por parametro
+     * @param email email del pasajero
+     * @return Devuelve el pasajero que coincide con el email pasado por parametro
      */
     public Pasajero buscarPasajeroEmail(String email){
         Pasajero resultado = null;
@@ -113,10 +115,10 @@ public class ListaPasajeros {
         return resultado;
     }
 
-    /** Selecciona el pasajero, si existe, del dni que pasa el usuario. A su vez comprueba si este es correcto y no fue utilizado por otros
+    /** Selecciona el pasajero, si existe, del dni que pasa el usuario
      * @param teclado el usuario introduce el dni del pasajero que desea
      * @param mensaje mensaje que se muestra por pantalla
-     * @return devuelve el pasajero seeleccionado si cumple los requisitos (que exista  y tenga alcance suficiente)
+     * @return devuelve el pasajero seeleccionado que coincide con el DNI
      */
     // Permite seleccionar un pasajero existente a partir de su DNI, usando el mensaje pasado como argumento para la solicitud
     // y siguiendo el orden y los textos mostrados en el enunciado

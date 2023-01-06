@@ -3,12 +3,11 @@ package es.upm.tp;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Vuelo es una clase que encapsula las variables enteras usadas para definir un vuelo concreto
  *
  * @author Cesar Jimenez Laguna
  * @author Iñaki Ramos Iturria
@@ -69,7 +68,7 @@ public class Vuelo {
     private ListaBilletes listaBilletesVuelo;
 
     /**
-     * Constructor of the class. Constructor que crea un vuelo con los parametros (id, avion, origen, terminal de origen, llegada, destino,
+     * Constructor que crea un vuelo con los parametros (id, avion, origen, terminal de origen, llegada, destino,
      * terminal de destino, llegada y precio) que recibe.
      *
      * @param id
@@ -103,6 +102,7 @@ public class Vuelo {
     }
 
     /**
+     * Getter del atributo ID
      * @return Devuelve el id del vuelo
      */
     public String getID() {
@@ -110,27 +110,31 @@ public class Vuelo {
     }
 
     /**
-     * @return Devuelve el avion del vuelo
+     * Getter del atributo avion
+     * @return Devuelve el avion
      */
     public Avion getAvion() {
         return avion;
     }
 
     /**
-     * @return Devuelve el origen del vuelo
+     * Getter del atributo origen
+     * @return Devuelve el aeropuerto de origen del que sale el avion
      */
     public Aeropuerto getOrigen() {
         return origen;
     }
 
     /**
-     * @return Devuelve la terminal de origen del vuelo
+     * Getter del atributo terminalOrigen
+     * @return Devuelve la terminal del aeropuerto de origen del vuelo
      */
     public int getTerminalOrigen() {
         return terminalOrigen;
     }
 
     /**
+     * Getter del atributo salida
      * @return Devuelve la fecha de salida del vuelo
      */
     public Fecha getSalida() {
@@ -138,20 +142,23 @@ public class Vuelo {
     }
 
     /**
-     * @return Devuelve el destino del vuelo
+     * Getter del atributo destino
+     * @return Devuelve el aeropuerto de destino del vuelo
      */
     public Aeropuerto getDestino() {
         return destino;
     }
 
     /**
-     * @return Devuelve la terminal de destino del vuelo
+     * Getter del atributo terminalDestino
+     * @return Devuelve la terminal del aeropuerto de destino del vuelo
      */
     public int getTerminalDestino() {
         return terminalDestino;
     }
 
     /**
+     * Getter del atributo llegada
      * @return Devuelve la fecha de llegada del vuelo
      */
     public Fecha getLlegada() {
@@ -159,13 +166,15 @@ public class Vuelo {
     }
 
     /**
-     * @return Devuelve el precio del vuelo
+     * Getter del atributo precio
+     * @return Devuelve el precio base del vuelo
      */
     public double getPrecio() {
         return precio;
     }
 
     /**
+     * Getter del precio preferente de los asientos del viaje
      * @return Devuelve el precio de preferencia (economico)
      */
     public double getPrecioPreferente() {
@@ -173,7 +182,8 @@ public class Vuelo {
     }
 
     /**
-     * @return Devuelve el precio de primera clase del vuelo
+     * Getter del precio de los asientos de primera clase del avion
+     * @return Devuelve el precio de primera clase
      */
     public double getPrecioPrimera() {
         return precio * 1.5;
@@ -181,6 +191,7 @@ public class Vuelo {
 
 
     /**
+     * Calcula los asientos que se encuentran libres en un avion
      * @return Devuelve el numero de los asientos libre en un Avion
      */
     public int numAsientosLibres() {
@@ -196,7 +207,8 @@ public class Vuelo {
     }
 
     /**
-     * @return Devuelve si el vuelo elegido esta lleno en cuanto a ocupacion
+     * Comprueba si un avion tiene todos los asientos llenos
+     * @return Devuelve si el vuelo elegido esta lleno o todavia quedan asientos libres
      */
     public boolean vueloLleno() {
         boolean lleno = false;
@@ -207,8 +219,9 @@ public class Vuelo {
     }
 
     /**
-     * @param fila
-     * @param columna
+     * Comprueba si el asiento pasado por parametro (fila y columna) esta ocupado
+     * @param fila fila del asiento de un avion para un vuelo
+     * @param columna columna del asiento de un avion para un vuelo
      * @return Devuelve true si el asiento elegido por un pasajero esta ocupado
      */
     public boolean asientoOcupado(int fila, int columna) {
@@ -220,8 +233,9 @@ public class Vuelo {
     }
 
     /**
-     * @param localizador
-     * @return Devuelve la ubicacion del billete buscado
+     * Busca el billete que coincide con su localizador pasado por parametro
+     * @param localizador identificador que es unico de cada billete
+     * @return Devuelve el billete que se busca por parametro
      */
     public Billete buscarBillete(String localizador) {
         Billete localizado = null;
@@ -230,8 +244,9 @@ public class Vuelo {
     }
 
     /**
-     * @param fila
-     * @param columna
+     * Busca el billete que coincide con la fila y columna pasadas por parametro
+     * @param fila fila del billete
+     * @param columna columna del
      * @return Devuelve un objeto billete que corresponde con una fila y columna determinado (dependiendo del asiento elegido),
      * en caso contrario devuelve null indicando que exede de los parametros establecidos por la fila y la columna del asiento elegido.
      */
@@ -244,8 +259,9 @@ public class Vuelo {
     }
 
     /**
-     * @param billete
-     * @return Devuelve si un asiento esta ocupado por un pasajero (true) y si no esta ocupado (false)
+     * Ocupa el asiento que coincide con el billete pasado por parametro
+     * @param billete billete que se identifica con un asiento
+     * @return Devuelve la ocupacion de un asiento por un pasajero (devuelve verdader si esta ocupado)
      */
     //Si está desocupado el asiento que indica el billete, lo pone ocupado y devuelve true, si no devuelve false
     public boolean ocuparAsiento(Billete billete) {
@@ -258,8 +274,9 @@ public class Vuelo {
     }
 
     /**
-     * @param localizador
-     * @return Devuelve que un asiento esta desocupado a traves del localizador
+     * Desocupa el asiento que coincide con el localizador pasado por parametro
+     * @param localizador localizador unico de cada billete
+     * @return Devuelve true si el asiento que inicialmente estaba ocupado, se ha desocupado y ahora esta libre
      */
     //A traves del localizador de billete, se desocupará el asiento
     public boolean desocuparAsiento(String localizador) {
@@ -283,7 +300,10 @@ public class Vuelo {
 
 
     /**
-     * @return
+     * Funcion que imprime la informacion completa de un vuelo en un formato especifico,
+     * ("Vuelo PM0066 de Josep Tarradellas Barcelona-El Prat(BCN) T2 (01/01/2023 08:15:00) a
+     * Gran Canaria(LPA) T1 (01/01/2023 11:00:05) en Boeing 747(EC-LKD) por 182,52€, asientos libres: 409")
+     * @return String que muestra los datos del vuelo
      */
     // Devuelve una cadena con información completa del vuelo
     //Ejemplo: Vuelo PM0066 de Josep Tarradellas Barcelona-El Prat(BCN) T2 (01/01/2023 08:15:00) a Gran Canaria(LPA) T1 (01/01/2023 11:00:05) en Boeing 747(EC-LKD) por 182,52€, asientos libres: 409
@@ -293,6 +313,12 @@ public class Vuelo {
                 + "(" + avion.getMatricula() + ") por " + precio + "€, asientos libres: " + numAsientosLibres();
     }
 
+    /**
+     * Funcion que imprime la informacion, de manera simple, de un vuelo con un formato especifico,
+     * ("Vuelo PM0066 de Josep Tarradellas Barcelona-El Prat(BCN) T2 (01/01/2023 08:15:00) a
+     * Gran Canaria(LPA) T1 (01/01/2023 11:00:05")
+     * @return String que muestra los datos abreviados de un vuelo
+     */
     // Devuelve una cadena con información abreviada del vuelo
     //Ejemplo: Vuelo PM0066 de Josep Tarradellas Barcelona-El Prat(BCN) T2 (01/01/2023 08:15:00) a Gran Canaria(LPA) T1 (01/01/2023 11:00:05)
     public String toStringSimple() {
@@ -300,6 +326,13 @@ public class Vuelo {
                 + destino.getNombre() + "(" + destino.getCodigo() + ") " + terminalDestino + " (" + llegada.toString() + ")";
     }
 
+    /**
+     * Funcion que comprueba si los datos recibidos por parametro, correspondientes a un vuelo, (si coinciden)
+     * @param codigoOrigen codigo del aeropuerto del que despega el avion
+     * @param codigoDestino codigo del aeropuerto en el que aterriza el avion
+     * @param fecha fecha en la que sale el avion
+     * @return devuelve true si se correspopnden los datos y false si son de distintos vuelos
+     */
     //Devuelve true si el código origen, destino y fecha son los mismos que el vuelo
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
         boolean correcto = false;
@@ -309,6 +342,10 @@ public class Vuelo {
         return correcto;
     }
 
+    /**
+     * Muestra de forma 'grafica' la disposicion de los asientos dentro del avion, incluyendo informacion como si un asiento esta ocupado o no,
+     * y que tipo de asiento es (TURISTA, PREFERENTE, PRIMERA)
+     */
     // Muestra la matriz  de asientos del vuelo, ejemplo:
     //   A  B  C  D  E  F
     // 1( )(X)( )( )( )( )
@@ -360,6 +397,11 @@ public class Vuelo {
         }
     }
 
+    /**
+     * Escribe en un fichero la lista de pasajeros del vuelo con un formato especifico
+     * @param fichero fichero en el que se escriben los datos
+     * @return devuelve true si se ha podido escribir en un fichero la lista de pasajeros del vuelo, siguiendo las indicaciones del enunciado
+     */
     //Devuelve true si ha podido escribir en un fichero la lista de pasajeros del vuelo, siguiendo las indicaciones del enunciado
     public boolean generarListaPasajeros(String fichero) {
         boolean ficheroActualizado = false;
@@ -403,6 +445,11 @@ public class Vuelo {
 
     //Métodos estáticos
 
+    /**
+     * Funcion que genera un ID de manera aleatoria con un formato especifico
+     * @param rand objeto perteneciente a la clase random
+     * @return devuelve el ID generado
+     */
     //Genera un ID de vuelo. Este consistirá en una cadena de 6 caracteres, de los cuales los dos
     //primeros serán PM y los 4 siguientes serán números aleatorios. Ejemplo: PM0123
     //NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.

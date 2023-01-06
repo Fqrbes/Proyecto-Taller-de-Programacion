@@ -3,7 +3,7 @@ package es.upm.tp;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Pasajero es una clase que encapsula las variables enteras usadas para definir un pasajero concreto
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
@@ -95,6 +95,11 @@ public class Pasajero {
         return true;
     }
 
+    /**
+     * Funcion que busca un billete mediante el localizador pasado por parametro
+     * @param localizador Localizador que es unico de cada billete y que lo identifica
+     * @return Devuelve el billete que se estaba buscando
+     */
     public Billete buscarBillete(String localizador){
         Billete localizado = null;
         localizado = listaBilletesPasajeros.buscarBillete(localizador);
@@ -106,6 +111,9 @@ public class Pasajero {
         return listaBilletesPasajeros.eliminarBillete(localizador);
     }
 
+    /**
+     * Funcion que encapsulado la funcion listarBilletes de la clase ListarBilletes
+     */
     public void listarBilletes(){
         listaBilletesPasajeros.listarBilletes();
     }
@@ -135,6 +143,7 @@ public class Pasajero {
         do {
             existeDni = false;
             numero = Utilidades.leerNumero(teclado, "Ingrese número de DNI:", 00000000L, 99999999L);
+
             letra = Utilidades.leerLetra(teclado, "Ingrese letra de DNI:", 'A','Z');
             if (pasajeros.buscarPasajeroDNI(Long.toString(numero) + letra) != null){
                 existeDni = true;
@@ -154,7 +163,6 @@ public class Pasajero {
                 System.out.println("Email ya existe.");
             }
         }while(!correctoEmail(email) || (existeEmail));
-
         return nuevoPasajero = new Pasajero(nombre, apellidos, numero, letra, email, maxBilletes);
     }
 

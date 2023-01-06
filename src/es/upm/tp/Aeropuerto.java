@@ -1,7 +1,7 @@
 package es.upm.tp;
 
 /**
- * Description of the class
+ * Aeropuerto es una clase que encapsula las variables enteras usadas para definir un aeropuerto concreto
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria

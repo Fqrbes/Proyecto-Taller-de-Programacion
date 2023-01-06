@@ -7,7 +7,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * ListaVuelos es una clase que encapsula las variables enteras usadas para definir los vuelos,
+ * así como también contiene funciones bara buscar, seleccionar e insertar vuelos en el array de nombre listavuelos
+ * Tambien escribe un fichero.csv con los datos de cada vuelo
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
@@ -101,8 +103,7 @@ public class ListaVuelos {
     //Muestra por pantalla los vuelos siguiendo el formato de los ejemplos del enunciado
     public void listarVuelos() {
         for (int i = 0; i < getOcupacion(); i++){
-            //ListaVuelos[i].toString();
-            System.out.println(ListaVuelos[i]);
+            System.out.println(ListaVuelos[i].toString());
         }
     }
 

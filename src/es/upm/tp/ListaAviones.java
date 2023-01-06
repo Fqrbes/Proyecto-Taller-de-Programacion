@@ -1,6 +1,5 @@
 package es.upm.tp;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
@@ -25,22 +24,22 @@ public class ListaAviones {
     private int ocupacion;
 
     /**
-     * Atributo que contiene el vector donde estan los aviones
+     * Atributo que contiene el array donde estan los aviones
      */
     private Avion[] ListaAviones;
 
     /**
-     * Constructor of the class. Constructor que crea un vector con la cantidad de aviones recibidos
-     * crea un array con la capacidad de los aviones
-     * @param capacidad especifica la capacidad del avion
+     * Constructor que crea un array con la cantidad de aviones recibidos
+     * @param capacidad especifica la capacidad de la lista que contiene los aviones
      */
     public ListaAviones(int capacidad){
         this.capacidad = capacidad;
         ListaAviones = new Avion[capacidad];
     }
 
-    /** Devuelve la cantidad de aviones que hay en ListaAviones
-     * @return especifica la ocupacion
+    /**
+     * Getter del atributo ocupacion
+     * @return devuelve la cantidad de aviones que hay en el array ListaAviones como variable ocupacion
      */
     public int getOcupacion(){
         return ocupacion;
@@ -59,9 +58,9 @@ public class ListaAviones {
         return estaLlena;
     }
 
-    /** Devuelve el avion que se encuentre en la posicion recibida por el parametro
-     * @param posicion especifica la posicion del avion requerido
-     * @return devuelve la posicion del avion pedido por parametro
+    /**
+     * Getter  para conseguir un avion
+     * @return Devuelve la posicion de un avion dentro del array ListaAviones
      */
     public Avion getAvion(int posicion){
         return ListaAviones[posicion];
@@ -98,11 +97,12 @@ public class ListaAviones {
         return resultado;
     }
 
-    /** Selecciona el avion, si existe, de la matricula que pasa el usuario. Y comprueba si tiene alcance suficiente para el vuelo
+    /**
+     * Selecciona el avion, si existe, de la matricula que se pasa por parametro. Ademas, comprueba si tiene alcance suficiente para el vuelo requerido
      * @param teclado el usuario introduce la matricula del avion que desea
      * @param mensaje mensaje que se muestra por pantalla
-     * @param alcance alcance que tiene el avion seleccionado
-     * @return devuelve el avion seeleccionado si cumple los requisitos (que exista  y tenga alcance suficiente)
+     * @param alcance alcance maximo que tiene el avion seleccionado
+     * @return devuelve el avion seleccionado si cumple los requisitos (que exista y tenga alcance suficiente)
      */
     // Permite seleccionar un avión existente a partir de su matrícula, y comprueba si dispone de un alcance mayor o igual que el pasado como argumento,
     // usando el mensaje pasado como argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado
@@ -114,12 +114,12 @@ public class ListaAviones {
         do {
             System.out.print("Ingrese matrícula de Avión:");
             matricula = teclado.nextLine();
-           avion = buscarAvion(matricula);
+            avion = buscarAvion(matricula);
             if (buscarAvion(matricula) == null){
                 System.out.println("Matricula de avion no encontrado.");
             }
             else if (avion.getAlcance() < alcance){
-                System.out.printf("Avión seleccionado con alcance insuficiente (menor que %.3f km).\n", alcance);
+                System.out.printf("Avión seleccionado con alcance insuficiente (menor que %3f km).\n", alcance);
             }
             else {
                 alcanceSuficiente = true;
@@ -153,9 +153,10 @@ public class ListaAviones {
         return copiado;
     }
 
-    /** Crea una lista con la funcion escribirAvionesCsv, tomando los datos del fichero Csv
-     * @param fichero fichero donde se guardan las listas de los aviones seleccionados
-     * @param capacidad es la capacidad de los aviones al los que se hace referencia
+    /**
+     * Crea una lista con la funcion escribirAvionesCsv, tomando los datos del fichero Csv
+     * @param fichero fichero donde se guardan los aviones con sus caracteristicas
+     * @param capacidad es la capacidad de la lista de aviones a la que se hace referencia
      * @return devuelve la listaImportada desde el fichero CSV
      */
     //Métodos estáticos

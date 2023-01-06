@@ -5,7 +5,9 @@ import java.util.Scanner;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * ListaAeropuertos es una clase que encapsula las variables enteras usadas para definir los aeropuertos,
+ * así como también contiene funciones bara buscar, seleccionar e insertar aeropuertos en el array de nombre Listaaeropuertos
+ * Tambien escribe un fichero.csv con los datos de cada aeropuerto
  *
  * @author      Cesar Jimenez Laguna
  * @author      Iñaki Ramos Iturria
@@ -25,7 +27,7 @@ import java.util.Scanner;
     private int ocupacion;
 
     /**
-     * Atributo que contiene el vector donde estan los aeropuertos
+     * Atributo que contiene el array donde se guardan los aeropuertos
      */
     private Aeropuerto[] listaAeropuertos;
 
@@ -39,15 +41,17 @@ import java.util.Scanner;
         listaAeropuertos = new Aeropuerto[capacidad];
     }
 
-    /** Devuelve la cantidad de aeropuertos que hay en la listaAeropuertos
-     * @return especifica la ocupacion
+    /**
+     * Getter del atributo ocupacion
+     * @return Devuelve la cantidad de aeropuertos que hay en la listaAeropuertos como una variable ocupacion
      */
     public int getOcupacion(){ //Cantidad de aeropuertos que tiene
         return ocupacion;
     }
 
-    /** Devuelve verdadero si la lista aeropuertos esta llena, si no, devuelve falso
-     * @return especifica verdadero o falso segun como este listaAeropuertos
+    /**
+     * Devuelve verdadero si la listaAeropuertos esta llena, si no, devuelve falso
+     * @return estaLlena
      */
     public boolean estaLlena(){
         boolean estaLlena;
@@ -61,9 +65,10 @@ import java.util.Scanner;
         //capacidad == ocupacion;
     }
 
-    /** Devuelve el aeropuerto que se encuentre en la posicion recibida por el parametro
-     * @param i especifica la posicion del aeropuerto
-     * @return devuelve el aeropuerto pedido por parametro
+    /**
+     * Getter para conseguir el aeropuerto
+     * @param i especifica la posicion del aeropuerto dentro del array
+     * @return Devuelve el aeropuerto que se encuentre en la posicion recibida por el parametro
      */
     public Aeropuerto getAeropuerto(int i){
         return listaAeropuertos[i];
@@ -147,9 +152,10 @@ import java.util.Scanner;
         return copiado;
     }
 
-    /** Crea una lista con la funcion escribirAeropuertosCsv, tomando los datos del fichero Csv
-     * @param fichero fichero donde se guardan las listas de los aeropuertos seleccionados
-     * @param capacidad es la capacidad del aeropuerto al que se hace referencia
+    /**
+     * Crea una lista con la funcion escribirAeropuertosCsv, tomando los datos del fichero Csv
+     * @param fichero fichero donde se guardan la lista de los aeropuertos seleccionados
+     * @param capacidad es la capacidad de la lista que contiene los aeropuertos
      * @return devuelve la listaImportada desde el fichero CSV
      */
     //Métodos estáticos

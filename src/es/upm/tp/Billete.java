@@ -89,6 +89,11 @@ public class Billete {
         }
         return precio;
     }
+
+    /**
+     * Funcion que muestra la informacion completa del billete de una forma especifica segun el enunciado
+     * @return Devuelve un String con toda la informacion del billete
+     */
     //                                                :
     // Texto que debe generar: Billete PM1111AAAA para Vuelo PM1111 de MAD T4 (24/12/2022 12:35:00) a BCN T1 (24/12/2022 14:05:30) en asiento 6C (TURISTA) por 100.00€
     public String toString(){
@@ -96,6 +101,10 @@ public class Billete {
                 + vuelo.getDestino().getCodigo() + vuelo.getTerminalDestino() + " (" + vuelo.getLlegada().toString() + ") en asiento " + getAsiento() + " (" + getTipo() +") por " + getPrecio() + "€";
     }
 
+    /**
+     * Funcion que cancela el billete y lo elimina de la lista y del pasajero hay que correspondia
+     * @return Devuelve True si se ha podido cancelar y false si no se ha podido
+     */
     // Cancela este billete, eliminandolo de la lista de billetes del vuelo y del pasajero correspondiente
     public boolean cancelar(){
         boolean cancelar = true;
@@ -112,6 +121,11 @@ public class Billete {
     }
 
 
+    /**
+     * Funcion que imprime la informacion del billete en un fichero siguiendo los ejemplos del enunciado
+     * @param fichero Fichero en el que se escribe la informacion del billete
+     * @return Devuelve True si se ha escrito en el fichero y false si no se ha podido
+     */
     // Imprime la informacion de este billete en un fichero siguiendo el formato de los ejemplos de ejecución del enunciado
     public boolean generarFactura(String fichero) {
         FileWriter fileWriter = null;
@@ -156,7 +170,13 @@ public class Billete {
 
     // Métodos estáticos
 
-    // Genera un localizador de billete. Este consistirá en una cadena de 10 caracteres, de los cuales los seis 
+    /**
+     * Funcion que genera un localizador para un billete concreto
+     * @param rand Objeto para que el localizador generado sea aleatorio
+     * @param idVuelo ID del vuelo al que esta asociado el billete
+     * @return Devuelve el localizador del billete en el que se encuentra el ID del vuelo
+     */
+    // Genera un localizador de billete. Este consistirá en una cadena de 10 caracteres, de los cuales los seis
     // primeros será el ID del vuelo asociado y los 4 siguientes serán letras mayúsculas aleatorias. Ejemplo: PM0123ABCD
     // NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.  
     public static String generarLocalizador(Random rand, String idVuelo){
@@ -167,7 +187,15 @@ public class Billete {
         return idVuelo + posicion1 + posicion2 + posicion3 + posicion4;
     }
 
-    // Crea un nuevo billete para un vuelo y pasajero específico, pidiendo por teclado los datos necesarios al usuario en el orden y 
+    /**
+     * Funcion que crea un nuevo billete para un vuelo y pasajero especifico pidiendo por teclado los datos necesarios al usuario como el vuelo y el pasajero
+     * @param teclado Teclado por donde pasa el usuario la informacion requerida
+     * @param rand Parametro para generar un localizador aleatorio del billete
+     * @param vuelo Vuelo del cual se ha comprado el billete
+     * @param pasajero Pasajero que comprar el billete y al que esta asociado este
+     * @return Devuelve el billete que se ha creado con los datos pasados por parametro
+     */
+    // Crea un nuevo billete para un vuelo y pasajero específico, pidiendo por teclado los datos necesarios al usuario en el orden y
     // con los textos indicados en los ejemplos de ejecución del enunciado
     // La función solicita repetidamente los parametros hasta que sean correctos
     public static Billete altaBillete(Scanner teclado, Random rand, Vuelo vuelo, Pasajero pasajero){
