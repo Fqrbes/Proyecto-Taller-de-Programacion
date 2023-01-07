@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Description of the clas
  *
  * @author Cesar Jimenez Laguna
  * @author Iñaki Ramos Iturria
