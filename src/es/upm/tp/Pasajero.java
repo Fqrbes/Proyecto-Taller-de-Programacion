@@ -141,7 +141,15 @@ public class Pasajero {
      * @return Devuelve true si se ha alcanzado el maximo de billetes que se puede compr
      */
     public boolean maxBilletesAlcanzado(){
-        return maxBilletes == numBilletesComprado();
+
+        return listaBilletesPasajeros.estaLlena();
+
+        /*boolean maxAlcanzado = false;
+        if (numBilletesComprado() == maxBilletes){
+            maxAlcanzado = true;
+        }
+        maxBilletes == numBilletesComprado();
+         */
     }
 
     /**

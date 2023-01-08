@@ -53,10 +53,17 @@ public class ListaBilletes {
      */
     public boolean estaLlena(){
         boolean estaLlena = false;
+        if (capacidad == getOcupacion()){
+            estaLlena = true;
+        }
+        return estaLlena;
+        //return capacidad == getOcupacion();
+        /*
         if (ocupacion == ListaBilletes.length){
             estaLlena = true;
         }
         return estaLlena;
+         */
     }
 
     /**

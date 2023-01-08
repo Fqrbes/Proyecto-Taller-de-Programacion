@@ -282,9 +282,9 @@ public class Billete {
             columna = (char) (vuelo.getAvion().getColumnas() + 'A' - 1);
             char letraColumna = Utilidades.leerLetra(teclado, "Ingrese columna del asiento (A-" + columna + "):", 'A',columna);
             asiento = String.valueOf(numeroFila) + letraColumna; //String.valueOf(letraColumna)
-            if (vuelo.asientoOcupado(numeroFila, columna - 64))
+            if (vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)columna - 66))))
                 System.out.println("El asiento " +  asiento + " ya está reservado.");
-        }while(vuelo.asientoOcupado(numeroFila, columna - 64));
+        }while(vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)columna - 66))));
         TIPO tipo;
         switch (numeroFila){
             case 1: 
