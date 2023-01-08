@@ -295,8 +295,7 @@ public class Billete {
                 break;
             default: tipo = TIPO.TURISTA; precioBilletes = vuelo.getPrecio();
         }
-        Billete nuevoBillete = new Billete(generarLocalizador(rand, vuelo.getID()), vuelo, pasajero, tipo, numeroFila, vuelo.getAvion().getColumnas(), precioBilletes);
-        System.out.println("Billete " + nuevoBillete.getLocalizador() + " comprado con éxito.");
-        return null;
+        Billete nuevoBillete = new Billete(generarLocalizador(rand, vuelo.getID()), vuelo, pasajero, tipo, numeroFila, Integer.parseInt(String.valueOf((char)columna - 66)), precioBilletes);
+        return nuevoBillete;
     }
 }

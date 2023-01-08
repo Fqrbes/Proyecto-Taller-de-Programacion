@@ -156,7 +156,7 @@ public class ListaVuelos {
             }else{
                 vueloExistente = buscarVuelo(pantalla);
                 if (vueloExistente == null){
-                    System.out.println("ID de vuelo no encontrado");
+                    System.out.println("ID de vuelo no encontrado.");
                 }else{
                     vueloTerminado = true;
                 }

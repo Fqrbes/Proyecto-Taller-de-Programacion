@@ -132,7 +132,8 @@ public class ListaPasajeros {
             System.out.print(mensaje);
             DNI = teclado.nextLine();
             if (buscarPasajeroDNI(DNI) == null){
-                System.out.println("DNI incorrecto.");
+                System.out.println("DNI no encontrado.");
+                //System.out.println("DNI incorrecto.");
             }
         }while (buscarPasajeroDNI(DNI) == null);
         return buscarPasajeroDNI(DNI);

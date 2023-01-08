@@ -315,7 +315,7 @@ public class Vuelo {
     public String toString() {
         return "Vuelo " + id + " de " + origen.getNombre() + "(" + origen.getCodigo() + ") T" + terminalOrigen + " (" + salida.toString() + ") a "
                 + destino.getNombre() + "(" + destino.getCodigo() + ") T" + terminalDestino + " (" + llegada.toString() + ") en " + avion.getMarca() + " " + avion.getModelo()
-                + "(" + avion.getMatricula() + ") por " + precio + "€, asientos libres: " + numAsientosLibres();
+                + "(" + avion.getMatricula() + ") por " + String.format("%.2f",precio).replace(",",".") + "€, asientos libres: " + numAsientosLibres();
     }
 
     /**

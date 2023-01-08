@@ -156,26 +156,41 @@ public class AirUPM {
         Pasajero pasajeroVigente = null;
         Billete billetePasajero = null;
 
-        do {
-            respuesta = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'a', 'z');
-            if (respuesta != 'n' && respuesta != 'e') {
-                System.out.println("El valor de entrada debe ser 'n' o 'e'");
-            }
-            if (respuesta == 'n'){
-                pasajeroVigente = Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
-                billetePasajero = Billete.altaBillete(teclado, rand, vuelo, pasajeroVigente);
-                System.out.println("Billete " + billetePasajero.getLocalizador() + " comprado con éxito.");
-            }
-            if (respuesta == 'e'){
-                pasajeroVigente = listaPasajeros.seleccionarPasajero(teclado, "Ingrese DNI del pasajero:");
-                if (pasajeroVigente.maxBilletesAlcanzado()){
-                    System.out.println("El Pasajero seleccionado no puede adquierir más billetes.");
-                } else{
+        if (vuelo.vueloLleno()) {
+            System.out.println("El vuelo " + vuelo.getID() + " está lleno, no se pueden comprar más billetes");
+        } else {
+            if (listaPasajeros.estaLlena()) {
+                pasajeroVigente = listaPasajeros.seleccionarPasajero(teclado, "Ingrese DNI del pasajero");
+                if (pasajeroVigente.maxBilletesAlcanzado()) {
+                    System.out.println("El pasajero seleccionado no puede adquirir más billetes.");
+                } else {
                     billetePasajero = Billete.altaBillete(teclado, rand, vuelo, pasajeroVigente);
                     System.out.println("Billete " + billetePasajero.getLocalizador() + " comprado con éxito.");
                 }
+            } else {
+                do {
+                    respuesta = Utilidades.leerLetra(teclado, "¿Comprar billete para un nuevo pasajero (n), o para uno ya existente (e)?", 'a', 'z');
+                    if (respuesta != 'n' && respuesta != 'e')
+                        System.out.println("El valor de entrada debe ser 'n' o 'e'");
+                    if (respuesta == 'e') {
+                        pasajeroVigente = listaPasajeros.seleccionarPasajero(teclado, "Ingrese DNI del pasajero:");
+                        if (pasajeroVigente.maxBilletesAlcanzado()) {
+                            System.out.println("El Pasajero seleccionado no puede adquierir más billetes.");
+                        } else {
+                            billetePasajero = Billete.altaBillete(teclado, rand, vuelo, pasajeroVigente);
+                            vuelo.ocuparAsiento(billetePasajero);
+                            System.out.println("Billete " + billetePasajero.getLocalizador() + " comprado con éxito.");
+                        }
+                    }
+                    if (respuesta == 'n') {
+                        pasajeroVigente = Pasajero.altaPasajero(teclado, listaPasajeros, maxBilletesPasajeros);
+                        billetePasajero = Billete.altaBillete(teclado, rand, vuelo, pasajeroVigente);
+                        vuelo.ocuparAsiento(billetePasajero);
+                        System.out.println("Billete " + billetePasajero.getLocalizador() + " comprado con éxito.");
+                    }
+                } while (respuesta != 'n' && respuesta != 'e');
             }
-        } while (respuesta != 'n' && respuesta != 'e');
+        }
     }
 
     //Métodos estáticos
@@ -221,9 +236,9 @@ public class AirUPM {
                             Pasajero nuevoPasajero = Pasajero.altaPasajero(scanner, airUPM.listaPasajeros, airUPM.maxBilletesPasajeros);
                             if (airUPM.insertarPasajero(nuevoPasajero)) {
                                 System.out.printf("Pasajero con DNI %08d" + nuevoPasajero.getLetraDNI() + " dado de alta con éxito.\n", nuevoPasajero.getNumeroDNI());
-                                //Juan Alberto
-                                //García Gámez
-                                //ja.garcia@alumnos.upm.es
+                                //   Juan Alberto
+                                //   García Gámez
+                                //   ja.garcia@alumnos.upm.es
                             }
                         }
                         break;

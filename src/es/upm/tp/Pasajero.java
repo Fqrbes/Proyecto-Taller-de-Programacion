@@ -227,6 +227,7 @@ public class Pasajero {
         System.out.print("Ingrese apellidos:");
         String apellidos = teclado.nextLine();
         long numero;
+        String numeroDNI;
         char letra;
         boolean existeDni, existeEmail;
         String email;
@@ -234,7 +235,22 @@ public class Pasajero {
         do {
             existeDni = false;
             numero = Utilidades.leerNumero(teclado, "Ingrese número de DNI:", 00000000L, 99999999L);
+            numeroDNI = String.valueOf(String.format("%08d",numero));
+            letra = Utilidades.leerLetra(teclado, "Ingrese letra de DNI:", 'A','Z');
+            if (pasajeros.buscarPasajeroDNI(numeroDNI + letra) != null){
+                existeDni = true;
+                System.out.println("DNI ya existe.");
+            }
+            if (!correctoDNI(numero, letra)){
+                System.out.println("DNI incorrecto.");
+            }
+        } while ((!correctoDNI(numero, letra)) || (existeDni));
 
+        /*
+                do {
+            existeDni = false;
+            numero = Utilidades.leerNumero(teclado, "Ingrese número de DNI:", 00000000L, 99999999L);
+            numeroDNI = String.valueOf(String.format("%08d",numero));
             letra = Utilidades.leerLetra(teclado, "Ingrese letra de DNI:", 'A','Z');
             if (pasajeros.buscarPasajeroDNI(Long.toString(numero) + letra) != null){
                 existeDni = true;
@@ -244,6 +260,7 @@ public class Pasajero {
                 System.out.println("DNI incorrecto.");
             }
         } while ((!correctoDNI(numero, letra)) || (existeDni));
+         */
 
         do {
             existeEmail = false;

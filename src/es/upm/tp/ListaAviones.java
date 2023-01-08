@@ -124,7 +124,7 @@ public class ListaAviones {
                 System.out.println("Matricula de avion no encontrado.");
             }
             else if (avion.getAlcance() < alcance){
-                System.out.printf("Avión seleccionado con alcance insuficiente (menor que %3f km).\n", alcance);
+                System.out.printf(String.format("Avión seleccionado con alcance insuficiente (menor que %.3f km).\n", alcance).replace(',', '.'));
             }
             else {
                 alcanceSuficiente = true;
