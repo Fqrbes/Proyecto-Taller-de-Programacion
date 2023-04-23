@@ -70,7 +70,7 @@ public class Avion {
      * @return Devuelve el modelo del avion
      */
     public String getModelo() {
-    return modelo;
+        return modelo;
     }
 
     /**

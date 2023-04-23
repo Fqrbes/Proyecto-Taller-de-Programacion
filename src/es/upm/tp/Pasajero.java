@@ -1,5 +1,6 @@
 package es.upm.tp;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -116,9 +117,6 @@ public class Pasajero {
         return email;
     }
 
-    public ListaBilletes getListaBilletesPasajeros() {
-        return this.listaBilletesPasajeros;
-    }
 
     /**
      * Funcion que imprime la informacion de un pasajero con un formato especifico,
@@ -128,7 +126,7 @@ public class Pasajero {
     // Texto que debe generar: Víctor Rodríguez Fernández, 00123456S, victor.rfernandez@upm.es
     public String toString(){
         return nombre + " " + apellidos +", " + getDNI() +", " + email;
-        }
+    }
 
 
     /**
@@ -204,6 +202,10 @@ public class Pasajero {
      */
     public void listarBilletes(){
         listaBilletesPasajeros.listarBilletes();
+    }
+
+    public ListaBilletes getListaBilletesPasajeros(){
+        return this.listaBilletesPasajeros;
     }
 
     /**
@@ -282,7 +284,9 @@ public class Pasajero {
                 System.out.println("Email ya existe.");
             }
         }while(!correctoEmail(email) || (existeEmail));
-        return nuevoPasajero = new Pasajero(nombre, apellidos, numero, letra, email, maxBilletes);
+        nuevoPasajero = new Pasajero(nombre, apellidos, numero, letra, email, maxBilletes);
+        pasajeros.insertarPasajero(nuevoPasajero);
+        return nuevoPasajero;
     }
 
     /**

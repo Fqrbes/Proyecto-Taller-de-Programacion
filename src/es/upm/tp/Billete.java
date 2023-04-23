@@ -230,8 +230,8 @@ public class Billete {
                 try{
                     fileWriter.close();
                 }catch (IOException excepcion3){
-                        System.out.println("Error de cierre del fichero " + fichero + ".");
-                        facturaGenerada = false;
+                    System.out.println("Error de cierre del fichero " + fichero + ".");
+                    facturaGenerada = false;
                 }
             }
         }
@@ -251,7 +251,7 @@ public class Billete {
      */
     // Genera un localizador de billete. Este consistirá en una cadena de 10 caracteres, de los cuales los seis
     // primeros será el ID del vuelo asociado y los 4 siguientes serán letras mayúsculas aleatorias. Ejemplo: PM0123ABCD
-    // NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.  
+    // NOTA: Usar el objeto rand pasado como argumento para la parte aleatoria.
     public static String generarLocalizador(Random rand, String idVuelo){
         Character posicion1 = (char) ('A' + rand.nextInt(26));
         Character posicion2 = (char) ('A' + rand.nextInt(26));
@@ -291,7 +291,7 @@ public class Billete {
         }while(vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)letraColumna - 64))));
         TIPO tipo;
         switch (numeroFila){
-            case 1: 
+            case 1:
                 tipo = TIPO.PRIMERA; precioBilletes = vuelo.getPrecioPrimera();
                 break;
             case 2,3,4,5:
@@ -300,6 +300,7 @@ public class Billete {
             default: tipo = TIPO.TURISTA; precioBilletes = vuelo.getPrecio();
         }
         Billete nuevoBillete = new Billete(generarLocalizador(rand, vuelo.getID()), vuelo, pasajero, tipo, numeroFila, Integer.parseInt(String.valueOf((char)columna - 66)), precioBilletes);
+        pasajero.aniadirBillete(nuevoBillete);
         return nuevoBillete;
     }
 }

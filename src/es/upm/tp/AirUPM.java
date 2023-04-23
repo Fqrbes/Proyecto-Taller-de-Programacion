@@ -82,14 +82,6 @@ public class AirUPM {
         this.maxVuelos = maxVuelos;
         this.maxPasajeros = maxPasajeros;
         this.maxBilletesPasajeros = maxBilletesPasajero;
-        /*
-        this.aeropuerto = aeropuerto;
-        this.avion = avion;
-        this.vuelo = vuelo;
-        this.pasajeros = pasajeros;
-        this.billetes = billetes;
-        */
-        cargarDatos(aeropuerto, avion, vuelo, pasajeros, billetes);
     }
 
     /**
@@ -231,11 +223,13 @@ public class AirUPM {
             opcion = menu(scanner);
             switch (opcion) {
                 case 1:
-                    if (airUPM.listaVuelos.estaLlena()) { //airUPM.maxVuelosAlcanzado()
+                    if (airUPM.listaVuelos.estaLlena()) { //airUPM.maxVuelosAlcanzado() airUPM.listaVuelos.estaLlena()
                         System.out.println("No se pueden dar de alta más vuelos.");
                     } else {
                         Vuelo.altaVuelo(scanner, new Random(), airUPM.listaAeropuertos, airUPM.listaAviones, airUPM.listaVuelos);
-                        /*Vuelo nuevoVuelo = Vuelo.altaVuelo(teclado, new Random(), airUPM.listaAeropuertos, airUPM.listaAviones, airUPM.listaVuelos);
+
+                        /*
+                        Vuelo nuevoVuelo = Vuelo.altaVuelo(scanner, new Random(), airUPM.listaAeropuertos, airUPM.listaAviones, airUPM.listaVuelos);
                         if (airUPM.insertarVuelo(nuevoVuelo)) {
                             System.out.println("Vuelo " + nuevoVuelo.getID() + " creado con éxito.");
                         }

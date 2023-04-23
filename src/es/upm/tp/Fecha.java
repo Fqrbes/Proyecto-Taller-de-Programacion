@@ -180,7 +180,7 @@ public class Fecha {
         //Eventos sin hora
         if (hora < 0)
             evento = String.format("%02d/%02d/%04d", dia, mes, anio);
-        //Eventos con hora
+            //Eventos con hora
         else
             evento = String.format("%02d/%02d/%04d %02d:%02d:%02d", dia, mes, anio, hora, minuto, segundo);
         return evento;
@@ -261,7 +261,7 @@ public class Fecha {
             // Mes de Febrero tiene 28 días (29 en bisiesto)
             if (mes == Meses.FEBRERO.ordinal() + 1)
                 fechaCorrecta = dia <= DIAS_FEBRERO || (dia <= DIAS_FEBRERO + 1 && esBisiesto(anio));
-            //Meses de Abril, Junio, Septiembre y Noviembre tienen 30 días
+                //Meses de Abril, Junio, Septiembre y Noviembre tienen 30 días
             else if (mes == Meses.ABRIL.ordinal() + 1 || mes == Meses.JUNIO.ordinal() + 1
                     || mes == Meses.SEPTIEMBRE.ordinal() + 1 || mes == Meses.NOVIEMBRE.ordinal() + 1)
                 fechaCorrecta = dia <= DIAS_MES - 1;
