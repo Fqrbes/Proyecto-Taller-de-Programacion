@@ -236,7 +236,7 @@ public class Billete {
             }
         }
         if (facturaGenerada){
-            System.out.println("Factura de Billete " + localizador + " generada en factura.txt");
+            System.out.println("Factura de Billete " + localizador + " generada en factura.csv");
         }
         return facturaGenerada;
     }

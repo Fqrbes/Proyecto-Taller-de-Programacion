@@ -141,7 +141,7 @@ public class Pasajero {
 
     /**
      * Funcion que comprueba si se ha alcanzado el maximo de billetes comprados
-     * @return Devuelve true si se ha alcanzado el maximo de billetes que se puede compr
+     * @return Devuelve true si se ha alcanzado el maximo de billetes que se puede comprar
      */
     public boolean maxBilletesAlcanzado(){
 
