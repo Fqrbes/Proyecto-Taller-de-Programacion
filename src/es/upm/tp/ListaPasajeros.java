@@ -56,7 +56,7 @@ public class ListaPasajeros {
      */
     public boolean estaLlena(){
         boolean estaLlena = false;
-        if (ocupacion == listaPasajeros.length){
+        if (capacidad == getOcupacion()){
             estaLlena = true;
         }
         return estaLlena;

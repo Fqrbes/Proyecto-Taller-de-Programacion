@@ -116,6 +116,9 @@ public class Pasajero {
         return email;
     }
 
+    public ListaBilletes getListaBilletesPasajeros() {
+        return this.listaBilletesPasajeros;
+    }
 
     /**
      * Funcion que imprime la informacion de un pasajero con un formato especifico,

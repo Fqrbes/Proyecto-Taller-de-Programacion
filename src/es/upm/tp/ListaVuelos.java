@@ -175,7 +175,7 @@ public class ListaVuelos {
     //Si existe el fichero, se sobreescribe, si no existe se crea.
     public boolean escribirVuelosCsv(String fichero){
         PrintWriter printW = null;
-        boolean copiado= true;
+        boolean copiado = true;
         try{
             printW = new PrintWriter(fichero);
             for (int i = 0; i < ocupacion; i ++){

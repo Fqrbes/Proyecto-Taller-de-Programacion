@@ -315,7 +315,7 @@ public class Vuelo {
     public String toString() {
         return "Vuelo " + id + " de " + origen.getNombre() + "(" + origen.getCodigo() + ") T" + terminalOrigen + " (" + salida.toString() + ") a "
                 + destino.getNombre() + "(" + destino.getCodigo() + ") T" + terminalDestino + " (" + llegada.toString() + ") en " + avion.getMarca() + " " + avion.getModelo()
-                + "(" + avion.getMatricula() + ") por " + String.format("%.2f",precio).replace(",",".") + "€, asientos libres: " + numAsientosLibres();
+                + "(" + avion.getMatricula() + ") por " + String.format("%.2f",precio) + "€, asientos libres: " + numAsientosLibres();
     }
 
     /**
@@ -364,6 +364,7 @@ public class Vuelo {
     // 9[ ][X][ ][ ][ ][X]
     //10[ ][ ][ ][ ][ ][ ]
     public void imprimirMatrizAsientos() {
+        //
         System.out.print("    ");
         for (int i = 1; i <= avion.getColumnas(); i++) {
             System.out.printf("%c  ", 64 + i);

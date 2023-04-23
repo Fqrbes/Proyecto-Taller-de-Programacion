@@ -169,8 +169,9 @@ public class Billete {
     //                                                :
     // Texto que debe generar: Billete PM1111AAAA para Vuelo PM1111 de MAD T4 (24/12/2022 12:35:00) a BCN T1 (24/12/2022 14:05:30) en asiento 6C (TURISTA) por 100.00€
     public String toString(){
-        return "Billete " + localizador + " para Vuelo " + vuelo.getID() + " de " + vuelo.getOrigen().getCodigo() + vuelo.getTerminalOrigen() + " (" + vuelo.getSalida().toString() + ") a "
-                + vuelo.getDestino().getCodigo() + vuelo.getTerminalDestino() + " (" + vuelo.getLlegada().toString() + ") en asiento " + getAsiento() + " (" + getTipo() +") por " + getPrecio() + "€";
+        return "Billete " + localizador + " para Vuelo " + vuelo.getID() + " de " + vuelo.getOrigen().getCodigo() + " T" + vuelo.getTerminalOrigen() + " (" + vuelo.getSalida().toString() + ") a "
+                + vuelo.getDestino().getCodigo() + " T" + vuelo.getTerminalDestino() + " (" + vuelo.getLlegada().toString() + ") en asiento " +
+                getAsiento() + " (" + getTipo() +") por " + String.format("%.2f", getPrecio()).replace(".",",") + "€";
     }
 
     /**
@@ -276,15 +277,18 @@ public class Billete {
         String asiento;
         char columna;
         int numeroFila;
+        char letraColumna;
         double precioBilletes;
         do {
             numeroFila = Utilidades.leerNumero(teclado, "Ingrese fila del asiento (1-" + vuelo.getAvion().getFilas() + "):", 1, vuelo.getAvion().getFilas());
             columna = (char) (vuelo.getAvion().getColumnas() + 'A' - 1);
-            char letraColumna = Utilidades.leerLetra(teclado, "Ingrese columna del asiento (A-" + columna + "):", 'A',columna);
+            letraColumna = Utilidades.leerLetra(teclado, "Ingrese columna del asiento (A-" + columna + "):", 'A',columna);
             asiento = String.valueOf(numeroFila) + letraColumna; //String.valueOf(letraColumna)
-            if (vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)columna - 66))))
+
+            if (vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)letraColumna - 64))))
                 System.out.println("El asiento " +  asiento + " ya está reservado.");
-        }while(vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)columna - 66))));
+
+        }while(vuelo.asientoOcupado(numeroFila, Integer.parseInt(String.valueOf((char)letraColumna - 64))));
         TIPO tipo;
         switch (numeroFila){
             case 1: 

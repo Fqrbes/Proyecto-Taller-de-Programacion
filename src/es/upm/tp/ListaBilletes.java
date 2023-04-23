@@ -164,7 +164,7 @@ public class ListaBilletes {
     public Billete seleccionarBillete(Scanner teclado, String mensaje) {
         Billete billeteSeleccionado = null;
         do {
-            System.out.println(mensaje);
+            System.out.print(mensaje);
             String localizador = teclado.nextLine();
             billeteSeleccionado = buscarBillete(localizador);
             if (billeteSeleccionado == null){
